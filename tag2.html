@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#171319">
+
+  <title>Nur für dich ❤️</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 24px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      color: #fff4f8;
+      background:
+        radial-gradient(ellipse at top, #432336 0%, transparent 55%),
+        linear-gradient(160deg, #211720, #100e13 75%);
+    }
+
+    .screen {
+      width: 100%;
+      max-width: 390px;
+      text-align: center;
+      padding: 30px 22px;
+      border: 1px solid #684054;
+      border-radius: 26px;
+      background: rgba(31, 23, 31, 0.94);
+      box-shadow: 0 18px 60px #0007;
+    }
+
+    .small {
+      color: #d7a2bd;
+      font-size: 11px;
+      letter-spacing: 4px;
+      margin-bottom: 26px;
+    }
+
+    .heart {
+      color: #f4a4c7;
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin: 0 0 14px;
+      font-weight: 700;
+    }
+
+    .intro {
+      color: #e8d5df;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 26px;
+    }
+
+    .numbers {
+      margin: 22px 0;
+      padding: 20px 10px;
+      border-radius: 18px;
+      border: 1px solid #694259;
+      background: #291d29;
+      color: #ffd0e3;
+      font-size: 25px;
+      line-height: 1.9;
+      letter-spacing: 5px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      font-size: 13px;
+      color: #e8c8d8;
+      margin: 22px 0 9px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 1px solid #79516a;
+      background: #171219;
+      color: white;
+      font-size: 17px;
+      text-align: center;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #f1a5c9;
+      box-shadow: 0 0 0 3px #f1a5c922;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 13px;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .primary {
+      color: #281521;
+      background: linear-gradient(135deg, #ffd1e5, #eaa0c2);
+    }
+
+    .secondary {
+      color: #f4c5db;
+      background: #332331;
+      border: 1px solid #67415a;
+    }
+
+    .hint {
+      display: none;
+      margin-top: 16px;
+      color: #e7bfd2;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .message {
+      display: none;
+      color: #ffc5df;
+      font-size: 14px;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    .success-date {
+      margin: 24px 0;
+      padding: 24px 12px;
+      border: 1px solid #9c607f;
+      border-radius: 18px;
+      background:
+        radial-gradient(ellipse at center, #593047, #291c2b);
+      box-shadow: inset 0 0 30px #f0a2ca0b;
+    }
+
+    .date {
+      font-size: 25px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: #ffd6e8;
+      white-space: nowrap;
+    }
+
+    .date-caption {
+      margin-top: 12px;
+      color: #d8aec4;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .thank-you {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #f7dce8;
+      margin: 24px 0;
+    }
+
+    .footer {
+      color: #a98a9d;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: 26px;
+      line-height: 1.8;
+    }
+
+    .sparkles {
+      color: #e7a6c6;
+      font-size: 18px;
+      letter-spacing: 8px;
+      margin: 20px 0;
+    }
+
+    @media (max-width: 360px) {
+      .screen {
+        padding: 25px 17px;
+      }
+
+      .date {
+        font-size: 22px;
+      }
+
+      .numbers {
+        font-size: 22px;
+        letter-spacing: 3px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="screen">
+
+    <!-- RÄTSEL-BILDSCHIRM -->
+    <section id="puzzle">
+      <div class="small">NUR FÜR DICH · 02</div>
+
+      <div class="heart">♡</div>
+
+      <h1>Eine kleine Aufgabe</h1>
+
+      <p class="intro">
+        Manchmal steckt hinter einer Zahlenfolge
+        mehr, als man denkt. ❤️
+        <br><br>
+        Bring die Zahlen in die richtige Reihenfolge
+        und gib deine Lösung ein.
+      </p>
+
+      <div class="numbers">
+        4 · 0 · 2 · 1<br>
+        0 · 2 · 0 · 2
+      </div>
+
+      <form id="answerForm">
+        <label for="answer">Deine Lösung</label>
+
+        <input
+          id="answer"
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          required
+        >
+
+        <button class="primary" type="submit">
+          Lösung abgeben
+        </button>
+      </form>
+
+      <button
+        class="secondary"
+        type="button"
+        id="hintButton"
+      >
+        Ich komme nicht weiter …
+      </button>
+
+      <div class="hint" id="hint">
+        Tipp ❤️: Wenn du nicht weiterkommst,
+        kehr ganz zum Anfang zurück.
+      </div>
+
+      <div class="message" id="error">
+        Noch nicht ganz. ❤️
+        Versuch es noch einmal.
+      </div>
+
+      <div class="footer">
+        EIN KLEINES RÄTSEL NUR FÜR DICH
+      </div>
+    </section>
+
+    <!-- ERFOLGS-BILDSCHIRM -->
+    <section id="success" style="display: none;">
+      <div class="small">NUR FÜR DICH · 02</div>
+
+      <div class="sparkles">✦ ♡ ✦</div>
+
+      <h1>Richtig!</h1>
+
+      <p class="intro">
+        Das war der Tag, an dem ich dir
+        zum ersten Mal geschrieben habe.
+        <br><br>
+        Ein schöner Anfang für unsere Geschichte.
+      </p>
+
+      <div class="success-date">
+        <div class="date">20 · 10 · 2024</div>
+        <div class="date-caption">EIN BESONDERER ANFANG</div>
+      </div>
+
+      <div class="heart">♡</div>
+
+      <p class="thank-you">
+        Danke, dass es dich gibt. ❤️
+      </p>
+
+      <div class="sparkles">✦ ♡ ✦</div>
+
+      <div class="footer">
+        EIN KLEINES RÄTSEL NUR FÜR DICH
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const form = document.getElementById("answerForm");
+    const answer = document.getElementById("answer");
+    const puzzle = document.getElementById("puzzle");
+    const success = document.getElementById("success");
+    const error = document.getElementById("error");
+    const hint = document.getElementById("hint");
+    const hintButton = document.getElementById("hintButton");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      // Punkte und andere Zeichen werden beim Prüfen ignoriert.
+      const entered = answer.value.replace(/\D/g, "");
+
+      if (entered === "20102024") {
+        puzzle.style.display = "none";
+        success.style.display = "block";
+        window.scrollTo(0, 0);
+      } else {
+        error.style.display = "block";
+      }
+    });
+
+    answer.addEventListener("input", function() {
+      error.style.display = "none";
+    });
+
+    hintButton.addEventListener("click", function() {
+      hint.style.display =
+        hint.style.display === "block" ? "none" : "block";
+    });
+  </script>
+</body>
+</html>
