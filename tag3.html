@@ -1,0 +1,398 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 3 ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #291a28 0%, transparent 65%),
+        linear-gradient(160deg, #1c141d, #100e13);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 28px 22px 29px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    animation: appear 0.7s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 35px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 27px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 35px;
+    margin: 0 0 17px;
+    font-weight: 700;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.intro {
+    margin: 0 0 24px;
+}
+
+.description {
+    margin: 22px 0 28px;
+}
+
+.puzzle {
+    background: #2c202d;
+    border: 1px solid #68405d;
+    border-radius: 18px;
+    padding: 25px 12px;
+    margin: 27px 0 20px;
+}
+
+.letter-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 17px;
+    min-height: 38px;
+}
+
+.letter-row + .letter-row {
+    margin-top: 9px;
+}
+
+.letter {
+    color: #ffc2df;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.dot {
+    color: #edb0d0;
+    font-size: 19px;
+}
+
+.label {
+    display: block;
+    text-align: left;
+    color: #f0e8ef;
+    font-size: 13px;
+    margin: 20px 0 8px;
+}
+
+input {
+    width: 100%;
+    height: 53px;
+    padding: 12px;
+    background: #19131b;
+    border: 1px solid #68405d;
+    border-radius: 13px;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    outline: none;
+}
+
+input:focus {
+    border-color: #f19bc7;
+}
+
+button {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px;
+    margin-top: 13px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(100deg, #ffd0e6, #e99bc7);
+    color: #21151e;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+}
+
+.hint-button {
+    background: #342433;
+    border: 1px solid #68405d;
+    color: #f4c3dd;
+}
+
+#error {
+    display: none;
+    color: #ff9dbb;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+#hint {
+    display: none;
+    color: #f4b6d6;
+    background: #302330;
+    border: 1px solid #68405d;
+    border-radius: 12px;
+    padding: 13px;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 30px;
+}
+
+#success {
+    display: none;
+    animation: appear 0.8s ease;
+}
+
+.message {
+    background: #2c202d;
+    border: 1px solid #68405d;
+    border-radius: 18px;
+    padding: 20px 18px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.message p {
+    font-size: 15px;
+    line-height: 1.85;
+    margin: 0 0 17px;
+}
+
+.signature {
+    color: #ffacd2;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 27px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 27px 19px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .letter-row {
+        gap: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 03</div>
+
+    <div id="puzzleScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Eine kleine Aufgabe</h1>
+
+        <p class="intro">
+            Manchmal steckt hinter einem Lächeln mehr,
+            als man denkt. 💗
+        </p>
+
+        <p class="description">
+            Bring die Buchstaben in die richtige Reihenfolge
+            und gib deine Lösung ein.
+        </p>
+
+        <div class="puzzle">
+
+            <div class="letter-row">
+                <span class="letter">N</span>
+                <span class="dot">·</span>
+                <span class="letter">L</span>
+                <span class="dot">·</span>
+                <span class="letter">Ä</span>
+                <span class="dot">·</span>
+                <span class="letter">E</span>
+            </div>
+
+            <div class="letter-row">
+                <span class="letter">C</span>
+                <span class="dot">·</span>
+                <span class="letter">L</span>
+                <span class="dot">·</span>
+                <span class="letter">H</span>
+            </div>
+
+        </div>
+
+        <label class="label" for="answer">
+            Deine Lösung
+        </label>
+
+        <input
+            type="text"
+            id="answer"
+            autocomplete="off"
+            spellcheck="false"
+        >
+
+        <button onclick="checkAnswer()">
+            Lösung abgeben
+        </button>
+
+        <button class="hint-button" onclick="showHint()">
+            Ich komme nicht weiter ...
+        </button>
+
+        <p id="error">
+            Noch nicht ganz. ❤️ Versuch es noch einmal.
+        </p>
+
+        <div id="hint">
+            Kleiner Tipp: Es passiert oft automatisch,
+            wenn du etwas Schönes erlebst. ❤️
+        </div>
+
+        <div class="footer">
+            EIN KLEINES RÄTSEL NUR FÜR DICH
+        </div>
+
+    </div>
+
+
+    <div id="success">
+
+        <div class="heart">♡</div>
+
+        <h1>Eine Nachricht für dich</h1>
+
+        <p>
+            Du hast das Rätsel gelöst. 💗
+        </p>
+
+        <div class="message">
+
+            <p>
+                Weißt du eigentlich, was ich besonders
+                an dir mag?
+            </p>
+
+            <p>
+                Dass du mich zum Lächeln bringen kannst,
+                selbst wenn ich einen schlechten Tag habe.
+            </p>
+
+            <p>
+                Vielleicht ist dir das gar nicht bewusst,
+                aber manchmal sind es gerade die kleinen
+                Dinge, die einen Menschen so besonders machen.
+            </p>
+
+            <p>
+                Ich bin einfach froh, dich an meiner Seite
+                zu haben und jeden Tag ein bisschen mehr
+                mit dir erleben zu dürfen.
+            </p>
+
+            <div class="signature">
+                Ich liebe dich. ❤️
+            </div>
+
+        </div>
+
+        <div class="footer">
+            NUR FÜR DICH · 03
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function checkAnswer() {
+
+    const answer = document
+        .getElementById("answer")
+        .value
+        .trim()
+        .toLowerCase()
+        .replace(/\s/g, "");
+
+    if (answer === "lächeln" || answer === "laecheln") {
+
+        document.getElementById("puzzleScreen").style.display = "none";
+        document.getElementById("success").style.display = "block";
+
+    } else {
+
+        document.getElementById("error").style.display = "block";
+
+    }
+}
+
+function showHint() {
+    document.getElementById("hint").style.display = "block";
+}
+
+document.getElementById("answer").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        checkAnswer();
+    }
+});
+
+</script>
+
+</body>
+</html>
