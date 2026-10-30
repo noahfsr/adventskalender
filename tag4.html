@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 4 ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #291a29 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: appear 0.7s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 27px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 32px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+.envelope {
+    width: 100%;
+    min-height: 75px;
+    padding: 13px 15px;
+    margin-top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: #342433;
+    border: 1px solid #68405d;
+    border-radius: 13px;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.envelope:hover {
+    background: #463044;
+    transform: translateY(-2px);
+}
+
+.envelope-icon {
+    font-size: 29px;
+}
+
+.envelope-text {
+    flex: 1;
+}
+
+.envelope-text strong {
+    display: block;
+    color: #ffd0e6;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.envelope-text small {
+    color: #d7bdcf;
+    font-size: 12px;
+}
+
+.arrow {
+    color: #f5a7ce;
+    font-size: 22px;
+}
+
+.content {
+    margin-top: 12px;
+    padding: 20px;
+    background: #2c202d;
+    border: 1px solid #68405d;
+    border-radius: 15px;
+    animation: appear 0.4s ease;
+}
+
+.content[hidden] {
+    display: none;
+}
+
+.content p {
+    line-height: 1.85;
+    text-align: center;
+}
+
+.flower-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    margin-top: 15px;
+    border: 1px solid #68405d;
+}
+
+.flower-caption {
+    color: #ffc2df;
+    font-size: 17px;
+    margin-top: 15px;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin-top: 15px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #120e14;
+}
+
+.video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+#finalMessage {
+    display: none;
+    margin-top: 24px;
+    padding: 20px;
+    background: #342433;
+    border: 1px solid #9a587e;
+    border-radius: 15px;
+    animation: appear 0.8s ease;
+}
+
+#finalMessage h2 {
+    color: #ffc2df;
+    font-size: 21px;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 27px 18px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 04</div>
+
+    <div class="heart">♡</div>
+
+    <h1>Drei kleine Überraschungen</h1>
+
+    <p>
+        Heute warten drei kleine Umschläge auf dich.
+        Hinter jedem versteckt sich etwas anderes. ❤️
+    </p>
+
+    <div class="divider"></div>
+
+
+    <!-- UMSCHLAG 1 -->
+
+    <button class="envelope" onclick="toggleEnvelope(1)"
+            id="button1" aria-expanded="false" type="button">
+
+        <span class="envelope-icon">💌</span>
+
+        <span class="envelope-text">
+            <strong>Umschlag 1</strong>
+            <small>Ein paar liebe Worte</small>
+        </span>
+
+        <span class="arrow">＋</span>
+    </button>
+
+    <div class="content" id="content1" hidden>
+
+        <div class="heart">♡</div>
+
+        <p>
+            Weißt du, was ich an dir besonders bewundere?
+
+            <br><br>
+
+            Deine Art. Du schaffst es, selbst ganz normale
+            Momente besonders zu machen.
+
+            <br><br>
+
+            Ich bin wirklich froh, dich zu haben. ❤️
+        </p>
+
+    </div>
+
+
+    <!-- UMSCHLAG 2 -->
+
+    <button class="envelope" onclick="toggleEnvelope(2)"
+            id="button2" aria-expanded="false" type="button">
+
+        <span class="envelope-icon">💌</span>
+
+        <span class="envelope-text">
+            <strong>Umschlag 2</strong>
+            <small>Eine kleine Überraschung</small>
+        </span>
+
+        <span class="arrow">＋</span>
+    </button>
+
+    <div class="content" id="content2" hidden>
+
+        <div class="heart">🌷</div>
+
+        <p>
+            Ein kleiner Blumenstrauß nur für dich.
+        </p>
+
+        <img
+            class="flower-image"
+            src="blumenstrauss-tag4.png"
+            alt="Rosa Tulpen und weiße Lilien in braunem Kraftpapier"
+        >
+
+        <div class="flower-caption">
+            Tulpen & Lilien – nur für dich. ❤️
+        </div>
+
+        <p>
+            Ich hoffe, er zaubert dir ein Lächeln ins Gesicht.
+        </p>
+
+    </div>
+
+
+    <!-- UMSCHLAG 3 -->
+
+    <button class="envelope" onclick="toggleEnvelope(3)"
+            id="button3" aria-expanded="false" type="button">
+
+        <span class="envelope-icon">💌</span>
+
+        <span class="envelope-text">
+            <strong>Umschlag 3</strong>
+            <small>Ein Lied für dich</small>
+        </span>
+
+        <span class="arrow">＋</span>
+    </button>
+
+    <div class="content" id="content3" hidden>
+
+        <div class="heart">🎄</div>
+
+        <h2 style="color:#ffd0e6; font-size:20px;">
+            Last Christmas
+        </h2>
+
+        <p>
+            Ein bisschen Weihnachtsstimmung für dich. ❤️
+        </p>
+
+        <div class="video-container">
+            <iframe
+                src="https://www.youtube-nocookie.com/embed/E8gmARGvPlI?rel=0"
+                title="Wham! - Last Christmas"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+
+    </div>
+
+
+    <!-- ABSCHLUSS -->
+
+    <div id="finalMessage">
+
+        <div class="heart">♥</div>
+
+        <h2>Das war's für heute!</h2>
+
+        <p>
+            Ich hoffe, deine drei kleinen Überraschungen
+            haben dir gefallen.
+
+            <br><br>
+
+            Morgen wartet schon etwas Neues auf dich. ❤️
+        </p>
+
+    </div>
+
+    <div class="footer">
+        DREI KLEINE ÜBERRASCHUNGEN · 04
+    </div>
+
+</div>
+
+
+<script>
+
+const opened = new Set();
+
+function toggleEnvelope(number) {
+
+    const content = document.getElementById("content" + number);
+    const button = document.getElementById("button" + number);
+    const arrow = button.querySelector(".arrow");
+
+    const opening = content.hidden;
+
+    content.hidden = !opening;
+
+    button.setAttribute("aria-expanded", String(opening));
+
+    arrow.textContent = opening ? "−" : "＋";
+
+    if (opening) {
+        opened.add(number);
+    }
+
+    if (opened.size === 3) {
+        document.getElementById("finalMessage").style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>
