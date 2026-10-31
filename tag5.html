@@ -1,0 +1,411 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 5 ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #291a29 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: appear 0.7s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 28px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 31px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+.voucher-option {
+    width: 100%;
+    min-height: 85px;
+    padding: 14px;
+    margin-top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #342433;
+    border: 1px solid #68405d;
+    border-radius: 14px;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.voucher-option:hover {
+    background: #463044;
+    transform: translateY(-2px);
+    border-color: #d989b4;
+}
+
+.voucher-icon {
+    font-size: 31px;
+    width: 37px;
+    text-align: center;
+}
+
+.option-text {
+    flex: 1;
+}
+
+.option-text strong {
+    display: block;
+    color: #ffd0e6;
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.option-text small {
+    color: #d7bdcf;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.arrow {
+    color: #f5a7ce;
+    font-size: 22px;
+}
+
+#voucher {
+    display: none;
+    animation: appear 0.7s ease;
+}
+
+.ticket {
+    margin-top: 24px;
+    padding: 25px 19px;
+    background:
+        linear-gradient(145deg, #382638, #2b202e);
+    border: 1px solid #9b6384;
+    border-radius: 17px;
+    position: relative;
+}
+
+.ticket-top {
+    color: #f5a7ce;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.ticket-icon {
+    font-size: 47px;
+    margin-bottom: 15px;
+}
+
+.ticket h2 {
+    color: #ffd0e6;
+    font-size: 23px;
+    margin: 0 0 16px;
+}
+
+.ticket p {
+    line-height: 1.85;
+}
+
+.ticket-divider {
+    border-top: 1px dashed #a66e91;
+    margin: 22px 0;
+}
+
+.ticket-footer {
+    color: #f5a7ce;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 21px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+button.back-button {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px;
+    margin-top: 17px;
+    background: #342433;
+    border: 1px solid #68405d;
+    border-radius: 13px;
+    color: #f4c3dd;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 27px 18px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 05</div>
+
+    <!-- AUSWAHL -->
+
+    <div id="selection">
+
+        <div class="heart">♡</div>
+
+        <h1>Ein Gutschein für dich</h1>
+
+        <p>
+            Heute darfst du dir etwas aussuchen.
+            Ich habe drei kleine Überraschungen
+            für uns vorbereitet. ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <p><b>Welchen Gutschein möchtest du haben?</b></p>
+
+
+        <button class="voucher-option"
+            onclick="chooseVoucher(0)">
+
+            <span class="voucher-icon">🎁</span>
+
+            <span class="option-text">
+                <strong>Überraschungs-Date</strong>
+                <small>Ein Nachmittag voller Überraschungen</small>
+            </span>
+
+            <span class="arrow">›</span>
+        </button>
+
+
+        <button class="voucher-option"
+            onclick="chooseVoucher(1)">
+
+            <span class="voucher-icon">✂️</span>
+
+            <span class="option-text">
+                <strong>Winter-Bastel-Date</strong>
+                <small>Gemeinsam etwas Schönes gestalten</small>
+            </span>
+
+            <span class="arrow">›</span>
+        </button>
+
+
+        <button class="voucher-option"
+            onclick="chooseVoucher(2)">
+
+            <span class="voucher-icon">🧺</span>
+
+            <span class="option-text">
+                <strong>Indoor-Picknick</strong>
+                <small>Ein gemütliches Picknick nur für uns</small>
+            </span>
+
+            <span class="arrow">›</span>
+        </button>
+
+        <div class="footer">
+            DEINE KLEINE AUSWAHL · 05
+        </div>
+
+    </div>
+
+
+    <!-- GEWÄHLTER GUTSCHEIN -->
+
+    <div id="voucher">
+
+        <div class="heart">♡</div>
+
+        <h1>Dein Gutschein</h1>
+
+        <p>Dieser Gutschein gehört dir! ❤️</p>
+
+        <div class="ticket">
+
+            <div class="ticket-top">
+                EIN GUTSCHEIN NUR FÜR DICH
+            </div>
+
+            <div class="ticket-icon" id="ticketIcon">
+                🎁
+            </div>
+
+            <h2 id="ticketTitle"></h2>
+
+            <p id="ticketDescription"></p>
+
+            <div class="ticket-divider"></div>
+
+            <div class="ticket-footer">
+                EINLÖSBAR BEI MIR ❤️
+            </div>
+
+            <div class="signature">
+                Ich liebe dich. ❤️
+            </div>
+
+        </div>
+
+        <button class="back-button" onclick="goBack()">
+            Anderen Gutschein ansehen
+        </button>
+
+        <div class="footer">
+            DEIN GUTSCHEIN · TAG 05
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const vouchers = [
+
+    {
+        icon: "🎁",
+        title: "Überraschungs-Date",
+        description:
+        "Ein Nachmittag voller Überraschungen. " +
+        "Ich plane alles für uns und du musst dich " +
+        "um nichts kümmern. Lass dich überraschen! ❤️"
+    },
+
+    {
+        icon: "✂️",
+        title: "Winter-Bastel-Date",
+        description:
+        "Ein kreativer Nachmittag nur für uns! " +
+        "Wir basteln gemeinsam etwas Schönes für " +
+        "Weihnachten und lassen unserer Kreativität " +
+        "freien Lauf. ❤️"
+    },
+
+    {
+        icon: "🧺",
+        title: "Indoor-Picknick",
+        description:
+        "Ein kleines Picknick nur für uns – mitten " +
+        "im Winter. Wir machen es uns mit einer " +
+        "Decke, leckeren Snacks und etwas zu trinken " +
+        "richtig gemütlich. ❤️"
+    }
+
+];
+
+
+function chooseVoucher(number) {
+
+    const selected = vouchers[number];
+
+    document.getElementById("ticketIcon").textContent =
+        selected.icon;
+
+    document.getElementById("ticketTitle").textContent =
+        selected.title;
+
+    document.getElementById("ticketDescription").textContent =
+        selected.description;
+
+    document.getElementById("selection").style.display = "none";
+
+    document.getElementById("voucher").style.display = "block";
+
+}
+
+
+function goBack() {
+
+    document.getElementById("voucher").style.display = "none";
+
+    document.getElementById("selection").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
