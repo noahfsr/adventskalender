@@ -1,0 +1,486 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 7 – Glückskeks ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #352039 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: appear 0.7s ease;
+    overflow: hidden;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 27px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 31px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+.cookie-area {
+    margin: 30px 0 25px;
+    padding: 25px 10px;
+    background: linear-gradient(145deg, #382938, #2b202e);
+    border: 1px solid #68405d;
+    border-radius: 18px;
+}
+
+.cookie-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 155px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    padding: 0;
+}
+
+.cookie {
+    position: relative;
+    width: 150px;
+    height: 115px;
+    transition: opacity 0.4s;
+}
+
+.cookie-half {
+    position: absolute;
+    top: 5px;
+    width: 78px;
+    height: 100px;
+    background: linear-gradient(145deg, #ffe3a5, #d99b4e);
+    border: 2px solid #c58b46;
+    box-shadow: inset 0 5px 10px rgba(255,255,255,0.25),
+                0 8px 15px rgba(0,0,0,0.2);
+}
+
+.cookie-half.left {
+    left: 0;
+    border-radius: 75% 35% 20% 70%;
+    clip-path: polygon(0 0, 100% 14%, 80% 100%, 0 83%);
+    transform: rotate(-8deg);
+}
+
+.cookie-half.right {
+    right: 0;
+    border-radius: 35% 75% 70% 20%;
+    clip-path: polygon(0 14%, 100% 0, 100% 83%, 20% 100%);
+    transform: rotate(8deg);
+}
+
+.cookie-seam {
+    position: absolute;
+    width: 17px;
+    height: 57px;
+    left: 50%;
+    top: 27px;
+    transform: translateX(-50%);
+    border-left: 2px dashed rgba(143,88,42,0.6);
+    z-index: 2;
+}
+
+.cookie-crumb {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #f4c47a;
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.crumb1 { left: 25%; top: 20%; }
+.crumb2 { right: 20%; top: 15%; }
+.crumb3 { left: 15%; bottom: 22%; }
+.crumb4 { right: 13%; bottom: 18%; }
+.crumb5 { left: 48%; top: 5%; }
+.crumb6 { right: 35%; bottom: 8%; }
+
+.cookie-button.broken .left {
+    animation: breakLeft 0.7s ease forwards;
+}
+
+.cookie-button.broken .right {
+    animation: breakRight 0.7s ease forwards;
+}
+
+@keyframes breakLeft {
+    to {
+        transform: translate(-65px, -25px) rotate(-35deg);
+        opacity: 0;
+    }
+}
+
+@keyframes breakRight {
+    to {
+        transform: translate(65px, -25px) rotate(35deg);
+        opacity: 0;
+    }
+}
+
+.cookie-button.broken .cookie-seam {
+    opacity: 0;
+}
+
+.cookie-button.broken .cookie-crumb {
+    animation: crumbFly 0.65s ease forwards;
+}
+
+@keyframes crumbFly {
+    to {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0.3);
+    }
+}
+
+.open-button {
+    width: 100%;
+    min-height: 49px;
+    padding: 14px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(100deg, #ffd0e6, #e99bc7);
+    color: #21151e;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.open-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+#message {
+    display: none;
+    margin-top: 20px;
+    animation: paperAppear 0.9s ease forwards;
+}
+
+@keyframes paperAppear {
+    from {
+        opacity: 0;
+        transform: translateY(35px) rotate(-3deg);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0);
+    }
+}
+
+.paper {
+    position: relative;
+    padding: 26px 19px;
+    background: #f4e5d0;
+    border-radius: 4px 4px 13px 13px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    color: #55404b;
+}
+
+.paper::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 0;
+    width: 100%;
+    height: 16px;
+    background: #f4e5d0;
+    clip-path: polygon(
+        0% 50%, 5% 0%, 10% 50%, 15% 0%,
+        20% 50%, 25% 0%, 30% 50%, 35% 0%,
+        40% 50%, 45% 0%, 50% 50%, 55% 0%,
+        60% 50%, 65% 0%, 70% 50%, 75% 0%,
+        80% 50%, 85% 0%, 90% 50%, 95% 0%,
+        100% 50%, 100% 100%, 0% 100%
+    );
+}
+
+.paper-label {
+    color: #a36a8e;
+    font-size: 11px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.paper h2 {
+    color: #75425f;
+    font-size: 24px;
+    margin: 0 0 20px;
+}
+
+.paper p {
+    color: #584552;
+    line-height: 1.9;
+    font-size: 15px;
+}
+
+.task {
+    margin-top: 20px;
+    padding: 17px 13px;
+    background: rgba(177,115,148,0.12);
+    border: 1px dashed #b783a0;
+    border-radius: 10px;
+}
+
+.task strong {
+    color: #854b6b;
+}
+
+.paper-heart {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #c36e98;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 27px 18px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 07</div>
+
+    <div id="start">
+
+        <div class="heart">♡</div>
+
+        <h1>Dein Glückskeks 🍀</h1>
+
+        <p>
+            Heute wartet eine kleine Botschaft
+            auf dich.
+
+            <br><br>
+
+            Doch zuerst musst du deinen
+            Glückskeks öffnen. ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="cookie-area">
+
+            <button class="cookie-button"
+                    id="cookieButton"
+                    onclick="openCookie()"
+                    aria-label="Glückskeks öffnen"
+                    type="button">
+
+                <div class="cookie">
+
+                    <div class="cookie-half left"></div>
+                    <div class="cookie-half right"></div>
+                    <div class="cookie-seam"></div>
+
+                    <span class="cookie-crumb crumb1"
+                        style="--x:-30px;--y:-35px;"></span>
+                    <span class="cookie-crumb crumb2"
+                        style="--x:35px;--y:-30px;"></span>
+                    <span class="cookie-crumb crumb3"
+                        style="--x:-30px;--y:30px;"></span>
+                    <span class="cookie-crumb crumb4"
+                        style="--x:35px;--y:35px;"></span>
+                    <span class="cookie-crumb crumb5"
+                        style="--x:0px;--y:-40px;"></span>
+                    <span class="cookie-crumb crumb6"
+                        style="--x:25px;--y:40px;"></span>
+
+                </div>
+
+            </button>
+
+            <p style="font-size:13px; color:#d7bdcf;">
+                Tippe auf den Glückskeks, um ihn zu öffnen.
+            </p>
+
+        </div>
+
+        <button class="open-button" onclick="openCookie()">
+            Glückskeks öffnen ✨
+        </button>
+
+    </div>
+
+
+    <!-- GEHEIME BOTSCHAFT -->
+
+    <div id="message">
+
+        <div class="heart">♡</div>
+
+        <h1>Deine Botschaft</h1>
+
+        <p>
+            Du hast deinen Glückskeks geöffnet!
+        </p>
+
+        <div class="paper">
+
+            <div class="paper-label">
+                DEIN GLÜCK FÜR HEUTE
+            </div>
+
+            <h2>Ein kleiner Wunsch 🍀</h2>
+
+            <p>
+                Heute ist ein guter Tag,
+                um etwas Schönes zu erleben.
+            </p>
+
+            <div class="task">
+
+                <p>
+                    <strong>Deine kleine Aufgabe:</strong>
+                </p>
+
+                <p>
+                    Mach heute ein Foto von etwas,
+                    das dich glücklich macht,
+                    und zeig es mir. ❤️
+                </p>
+
+            </div>
+
+            <div class="paper-heart">♥</div>
+
+        </div>
+
+        <div class="footer">
+            DEIN GLÜCKSMOMENT · 07
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let opened = false;
+
+function openCookie() {
+
+    if (opened) {
+        return;
+    }
+
+    opened = true;
+
+    const button = document.getElementById("cookieButton");
+
+    button.classList.add("broken");
+
+    document.querySelector(".open-button").disabled = true;
+    document.querySelector(".open-button").style.opacity = "0.5";
+
+    setTimeout(function() {
+
+        document.getElementById("start").style.display = "none";
+
+        document.getElementById("message").style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 750);
+
+}
+
+</script>
+
+</body>
+</html>
