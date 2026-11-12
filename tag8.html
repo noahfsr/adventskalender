@@ -1,0 +1,508 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 8 – Wer würde eher? ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #291a29 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: appear 0.7s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 27px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 31px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #d7bdcf;
+    font-size: 12px;
+    margin-bottom: 9px;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 7px;
+    background: #3c2c3c;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 27px;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #cf79a5, #ffd0e6);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.question-box {
+    padding: 25px 17px;
+    margin: 20px 0;
+    background: linear-gradient(145deg, #342433, #2c202d);
+    border: 1px solid #68405d;
+    border-radius: 17px;
+    animation: appear 0.4s ease;
+}
+
+.question-number {
+    color: #e99abb;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.question {
+    color: white;
+    font-size: 21px;
+    line-height: 1.5;
+    font-weight: bold;
+    min-height: 95px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.answer-button {
+    width: 100%;
+    min-height: 54px;
+    padding: 14px;
+    margin-top: 12px;
+    border: 1px solid #68405d;
+    border-radius: 13px;
+    background: #342433;
+    color: #f4c3dd;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.answer-button:hover {
+    background: #523448;
+    border-color: #e99abb;
+    transform: translateY(-2px);
+}
+
+.answer-button:active {
+    transform: scale(0.98);
+}
+
+.answer-icon {
+    margin-right: 8px;
+    font-size: 19px;
+}
+
+.explanation {
+    color: #cdaec1;
+    font-size: 12px;
+    margin-top: 18px;
+}
+
+#result {
+    display: none;
+    animation: appear 0.7s ease;
+}
+
+.result-box {
+    padding: 20px 17px;
+    margin-top: 20px;
+    background: #2c202d;
+    border: 1px solid #68405d;
+    border-radius: 16px;
+    text-align: left;
+}
+
+.result-line {
+    padding: 12px 0;
+    border-bottom: 1px solid #50364b;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    color: #f0e8ef;
+}
+
+.result-line:last-child {
+    border-bottom: none;
+}
+
+.result-answer {
+    color: #ffacd2;
+    font-weight: bold;
+    text-align: right;
+}
+
+.summary {
+    margin-top: 20px;
+    padding: 18px;
+    background: #342433;
+    border: 1px solid #79516d;
+    border-radius: 15px;
+}
+
+.summary h2 {
+    color: #ffd0e6;
+    font-size: 21px;
+}
+
+.summary p {
+    line-height: 1.8;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.restart-button {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px;
+    margin-top: 17px;
+    background: linear-gradient(100deg, #ffd0e6, #e99bc7);
+    border: none;
+    border-radius: 13px;
+    color: #21151e;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 27px 18px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .question {
+        font-size: 19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 08</div>
+
+    <!-- QUIZ -->
+
+    <div id="quiz">
+
+        <div class="heart">♡</div>
+
+        <h1>Wer würde eher ...?</h1>
+
+        <p>
+            Heute wird es ein bisschen lustig!
+            Bei jeder Frage musst du entscheiden,
+            wer von uns beiden eher etwas machen würde. ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="progress-info">
+            <span id="questionCounter">Frage 1 von 5</span>
+            <span id="percentage">20 %</span>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="question-box" id="questionBox">
+
+            <div class="question-number" id="questionNumber">
+                FRAGE 01
+            </div>
+
+            <div class="question" id="questionText">
+                Wer würde eher bei einem Film einschlafen?
+            </div>
+
+        </div>
+
+        <button class="answer-button" onclick="chooseAnswer('Du')">
+            <span class="answer-icon">🙋</span> Du
+        </button>
+
+        <button class="answer-button" onclick="chooseAnswer('Ich')">
+            <span class="answer-icon">🙋‍♀️</span> Ich
+        </button>
+
+        <button class="answer-button" onclick="chooseAnswer('Beide')">
+            <span class="answer-icon">❤️</span> Beide
+        </button>
+
+        <p class="explanation">
+            Es gibt keine richtigen oder falschen Antworten. ;)
+        </p>
+
+    </div>
+
+
+    <!-- AUSWERTUNG -->
+
+    <div id="result">
+
+        <div class="heart">♥</div>
+
+        <h1>Das war's!</h1>
+
+        <p>
+            Du hast alle fünf Fragen beantwortet.
+            Hier sind deine Entscheidungen. ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="result-box" id="answerList">
+        </div>
+
+        <div class="summary">
+
+            <div style="font-size:35px;">💕</div>
+
+            <h2>Ein gutes Team!</h2>
+
+            <p>
+                Egal, wer öfter etwas macht –
+                zusammen sind wir einfach ein gutes Team.
+
+                <br><br>
+
+                Und genau so soll es bleiben.
+            </p>
+
+            <div class="signature">
+                Ich liebe dich. ❤️
+            </div>
+
+        </div>
+
+        <button class="restart-button" onclick="restartQuiz()">
+            Quiz noch einmal spielen
+        </button>
+
+    </div>
+
+
+    <div class="footer">
+        FÜNF FRAGEN · TAG 08
+    </div>
+
+</div>
+
+
+<script>
+
+const questions = [
+
+    "Wer würde eher bei einem Film einschlafen? 😴",
+
+    "Wer würde eher grundlos anfangen zu lachen? 😂",
+
+    "Wer würde eher spontan einen Ausflug planen? 🚗",
+
+    "Wer würde eher einen ganzen Tag gemütlich im Bett verbringen? 🛌",
+
+    "Wer würde eher etwas vergessen und es erst später bemerken? 🤭"
+
+];
+
+let currentQuestion = 0;
+
+let answers = [];
+
+
+function updateQuestion() {
+
+    document.getElementById("questionCounter").textContent =
+        "Frage " + (currentQuestion + 1) + " von 5";
+
+    document.getElementById("percentage").textContent =
+        Math.round((currentQuestion + 1) / questions.length * 100) + " %";
+
+    document.getElementById("progress").style.width =
+        ((currentQuestion + 1) / questions.length * 100) + "%";
+
+    document.getElementById("questionNumber").textContent =
+        "FRAGE 0" + (currentQuestion + 1);
+
+    const questionText =
+        document.getElementById("questionText");
+
+    questionText.textContent = questions[currentQuestion];
+
+    // Kleine Animation beim Wechsel
+
+    const box = document.getElementById("questionBox");
+
+    box.style.animation = "none";
+
+    void box.offsetWidth;
+
+    box.style.animation = "appear 0.4s ease";
+
+}
+
+
+function chooseAnswer(answer) {
+
+    answers.push({
+        question: questions[currentQuestion],
+        answer: answer
+    });
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+
+        updateQuestion();
+
+    } else {
+
+        showResult();
+
+    }
+
+}
+
+
+function showResult() {
+
+    document.getElementById("quiz").style.display = "none";
+
+    document.getElementById("result").style.display = "block";
+
+    const list = document.getElementById("answerList");
+
+    list.innerHTML = "";
+
+    answers.forEach(function(item, index) {
+
+        const row = document.createElement("div");
+        row.className = "result-line";
+
+        const question = document.createElement("span");
+        question.textContent =
+            (index + 1) + ". " + item.question;
+
+        const answer = document.createElement("span");
+        answer.className = "result-answer";
+        answer.textContent = item.answer;
+
+        row.appendChild(question);
+        row.appendChild(answer);
+
+        list.appendChild(row);
+
+    });
+
+}
+
+
+function restartQuiz() {
+
+    currentQuestion = 0;
+    answers = [];
+
+    document.getElementById("result").style.display = "none";
+
+    document.getElementById("quiz").style.display = "block";
+
+    updateQuestion();
+
+}
+
+
+updateQuestion();
+
+</script>
+
+</body>
+</html>
