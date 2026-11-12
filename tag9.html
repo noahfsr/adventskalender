@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 9 – Weihnachtslichter ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #291a29 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: appear 0.7s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 27px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 30px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+.instructions {
+    padding: 18px 15px;
+    background: #302330;
+    border: 1px solid #68405d;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    color: #e7bfd5;
+    font-size: 13px;
+    margin: 23px 0 10px;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 7px;
+    background: #3c2c3c;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #cf79a5, #ffd0e6);
+    border-radius: 10px;
+    transition: width 0.4s ease;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px 8px;
+    margin-top: 15px;
+    background: #2b202e;
+    border: 1px solid #68405d;
+    border-radius: 18px;
+}
+
+.light {
+    height: 112px;
+    border-radius: 17px;
+    border: 2px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    opacity: 0.48;
+    transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+    font-size: 35px;
+    background: #392b3b;
+}
+
+.light:disabled {
+    cursor: default;
+}
+
+.light.active {
+    opacity: 1;
+    transform: scale(1.05);
+    box-shadow: 0 0 25px currentColor;
+}
+
+.light:nth-child(1) {
+    color: #ff91b9;
+    border-color: #c7668c;
+}
+
+.light:nth-child(2) {
+    color: #ffda88;
+    border-color: #ac8c4a;
+}
+
+.light:nth-child(3) {
+    color: #a9baff;
+    border-color: #6178be;
+}
+
+.light:nth-child(4) {
+    color: #a8e6c0;
+    border-color: #619c79;
+}
+
+.light:nth-child(1).active {
+    background: #873e62;
+}
+
+.light:nth-child(2).active {
+    background: #856b36;
+}
+
+.light:nth-child(3).active {
+    background: #43588f;
+}
+
+.light:nth-child(4).active {
+    background: #37684d;
+}
+
+.status {
+    min-height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f4bdd9;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+.start-button {
+    width: 100%;
+    min-height: 49px;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(100deg, #ffd0e6, #e99bc7);
+    color: #21151e;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.start-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+.start-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    transform: none;
+}
+
+#gameScreen, #success {
+    display: none;
+    animation: appear 0.6s ease;
+}
+
+.final-message {
+    padding: 22px 18px;
+    margin-top: 23px;
+    background: #302330;
+    border: 1px solid #79516d;
+    border-radius: 17px;
+    text-align: left;
+}
+
+.final-message p {
+    line-height: 1.85;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 27px 18px;
+    }
+
+    .light {
+        height: 100px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 09</div>
+
+
+    <!-- STARTSEITE -->
+
+    <div id="startScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Der Weihnachtslichter-Test ✨</h1>
+
+        <p>
+            Vier Lichter, eine geheime Reihenfolge
+            und eine kleine Herausforderung warten auf dich.
+        </p>
+
+        <div class="instructions">
+
+            <p>
+                Schau genau hin und versuche, dir
+                die Reihenfolge zu merken.
+            </p>
+
+            <p>
+                Danach musst du dieselben Lichter
+                in genau dieser Reihenfolge antippen.
+            </p>
+
+            <p>
+                Mit jeder Runde wird es ein bisschen schwieriger.
+                Bist du bereit? ❤️
+            </p>
+
+        </div>
+
+        <button class="start-button" onclick="startGame()">
+            Spiel starten ✨
+        </button>
+
+    </div>
+
+
+    <!-- SPIEL -->
+
+    <div id="gameScreen">
+
+        <div class="heart">✦</div>
+
+        <h1>Merke dir die Lichter!</h1>
+
+        <div class="game-info">
+            <span id="roundText">Runde 1 von 4</span>
+            <span id="progressText">0 / 4</span>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <p id="status" class="status">
+            Bereit? Schau genau hin!
+        </p>
+
+        <div class="game-board">
+
+            <button class="light" id="light0"
+                onclick="pressLight(0)" disabled
+                aria-label="Rosa Licht">✦</button>
+
+            <button class="light" id="light1"
+                onclick="pressLight(1)" disabled
+                aria-label="Goldenes Licht">✦</button>
+
+            <button class="light" id="light2"
+                onclick="pressLight(2)" disabled
+                aria-label="Blaues Licht">✦</button>
+
+            <button class="light" id="light3"
+                onclick="pressLight(3)" disabled
+                aria-label="Grünes Licht">✦</button>
+
+        </div>
+
+        <button class="start-button" id="replayButton"
+            onclick="playSequence()" style="display:none;">
+            Reihenfolge erneut ansehen
+        </button>
+
+    </div>
+
+
+    <!-- GEWONNEN -->
+
+    <div id="success">
+
+        <div class="heart">♥</div>
+
+        <h1>Du hast es geschafft!</h1>
+
+        <p>
+            Alle vier Runden gemeistert! ✨
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="final-message">
+
+            <p>
+                Du hast alle Lichter zum Leuchten gebracht!
+            </p>
+
+            <p>
+                Ich hoffe, das kleine Spiel hat dir
+                ein bisschen Weihnachtsfreude gemacht.
+            </p>
+
+            <p>
+                Und falls dein Tag einmal nicht so schön
+                sein sollte, möchte ich dich daran erinnern,
+                dass du für mich etwas ganz Besonderes bist.
+            </p>
+
+            <div class="signature">
+                Ich liebe dich. ❤️
+            </div>
+
+        </div>
+
+        <div class="footer">
+            EIN KLEINER WEIHNACHTSMOMENT · 09
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const ROUND_LENGTHS = [3, 4, 5, 6];
+
+let round = 0;
+let sequence = [];
+let playerPosition = 0;
+let inputEnabled = false;
+let busy = false;
+
+
+// Wartefunktion
+
+function wait(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+
+// Startet das Spiel
+
+function startGame() {
+
+    document.getElementById("startScreen").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
+
+    round = 0;
+    sequence = [];
+
+    nextRound();
+}
+
+
+// Neue Runde
+
+async function nextRound() {
+
+    busy = true;
+    inputEnabled = false;
+
+    playerPosition = 0;
+
+    const length = ROUND_LENGTHS[round];
+
+    document.getElementById("roundText").textContent =
+        "Runde " + (round + 1) + " von 4";
+
+    document.getElementById("progressText").textContent =
+        round + " / 4";
+
+    document.getElementById("progress").style.width =
+        (round / 4 * 100) + "%";
+
+    document.getElementById("status").textContent =
+        "Schau genau hin ... ✨";
+
+    document.getElementById("replayButton").style.display = "none";
+
+    // Eine zufällige Folge erstellen
+
+    sequence = [];
+
+    for (let i = 0; i < length; i++) {
+        sequence.push(Math.floor(Math.random() * 4));
+    }
+
+    await wait(700);
+
+    await playSequence();
+
+}
+
+
+// Spielbeleuchtung
+
+async function flashLight(index) {
+
+    const light = document.getElementById("light" + index);
+
+    light.classList.add("active");
+
+    await wait(550);
+
+    light.classList.remove("active");
+
+    await wait(250);
+
+}
+
+
+// Reihenfolge zeigen
+
+async function playSequence() {
+
+    if (busy === false && inputEnabled === true) {
+        // Erneutes Ansehen der aktuellen Folge.
+        // Der bisherige Spielfortschritt bleibt erhalten.
+        inputEnabled = false;
+    }
+
+    busy = true;
+    inputEnabled = false;
+
+    document.getElementById("replayButton").style.display = "none";
+    document.getElementById("status").textContent =
+        "Merke dir die Reihenfolge!";
+
+    for (let i = 0; i < 4; i++) {
+        document.getElementById("light" + i).disabled = true;
+    }
+
+    await wait(400);
+
+    for (const index of sequence) {
+        await flashLight(index);
+    }
+
+    document.getElementById("status").textContent =
+        "Jetzt bist du dran! Tippe die Lichter an.";
+
+    for (let i = 0; i < 4; i++) {
+        document.getElementById("light" + i).disabled = false;
+    }
+
+    busy = false;
+    inputEnabled = true;
+}
+
+
+// Spieler wählt ein Licht
+
+async function pressLight(index) {
+
+    if (!inputEnabled || busy) {
+        return;
+    }
+
+    busy = true;
+    inputEnabled = false;
+
+    await flashLight(index);
+
+    if (index === sequence[playerPosition]) {
+
+        playerPosition++;
+
+        document.getElementById("progressText").textContent =
+            playerPosition + " / " + sequence.length;
+
+        if (playerPosition === sequence.length) {
+
+            round++;
+
+            document.getElementById("status").textContent =
+                "Sehr gut! Runde geschafft! ❤️";
+
+            if (round === 4) {
+
+                document.getElementById("progress").style.width = "100%";
+
+                await wait(900);
+
+                showSuccess();
+
+            } else {
+
+                document.getElementById("progress").style.width =
+                    (round / 4 * 100) + "%";
+
+                await wait(1000);
+
+                busy = false;
+
+                nextRound();
+
+            }
+
+        } else {
+
+            busy = false;
+            inputEnabled = true;
+
+        }
+
+    } else {
+
+        document.getElementById("status").textContent =
+            "Nicht ganz! Versuch dieselbe Runde noch einmal. ❤️";
+
+        playerPosition = 0;
+
+        await wait(700);
+
+        for (let i = 0; i < 4; i++) {
+            document.getElementById("light" + i).disabled = true;
+        }
+
+        document.getElementById("replayButton").style.display = "block";
+
+        document.getElementById("replayButton").textContent =
+            "Nochmal versuchen";
+
+        busy = false;
+        inputEnabled = false;
+
+    }
+
+}
+
+
+// Überraschung zeigen
+
+function showSuccess() {
+
+    document.getElementById("gameScreen").style.display = "none";
+
+    document.getElementById("success").style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
