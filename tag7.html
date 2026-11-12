@@ -39,14 +39,8 @@ body {
 }
 
 @keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .tag {
@@ -81,121 +75,103 @@ p {
     border-radius: 5px;
 }
 
+/* GLÜCKSKEKS-BEREICH */
+
 .cookie-area {
-    margin: 30px 0 25px;
-    padding: 25px 10px;
-    background: linear-gradient(145deg, #382938, #2b202e);
+    margin: 27px 0 20px;
+    padding: 25px 10px 20px;
+    background:
+        radial-gradient(ellipse at center, #514039 0%, #382938 65%, #2b202e 100%);
     border: 1px solid #68405d;
-    border-radius: 18px;
+    border-radius: 19px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cookie-area::before,
+.cookie-area::after {
+    content: "✦";
+    position: absolute;
+    color: rgba(255,218,166,0.45);
+    font-size: 20px;
+}
+
+.cookie-area::before {
+    top: 20px;
+    left: 20px;
+}
+
+.cookie-area::after {
+    bottom: 23px;
+    right: 22px;
 }
 
 .cookie-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
     width: 100%;
-    min-height: 155px;
-    background: transparent;
+    padding: 0;
     border: none;
+    background: transparent;
     cursor: pointer;
     position: relative;
-    padding: 0;
 }
 
-.cookie {
-    position: relative;
-    width: 150px;
-    height: 115px;
-    transition: opacity 0.4s;
+.cookie-svg {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    margin: 0 auto;
+    overflow: visible;
+    filter: drop-shadow(0 13px 13px rgba(0,0,0,0.35));
 }
 
-.cookie-half {
-    position: absolute;
-    top: 5px;
-    width: 78px;
-    height: 100px;
-    background: linear-gradient(145deg, #ffe3a5, #d99b4e);
-    border: 2px solid #c58b46;
-    box-shadow: inset 0 5px 10px rgba(255,255,255,0.25),
-                0 8px 15px rgba(0,0,0,0.2);
+#leftHalf,
+#rightHalf {
+    transform-box: fill-box;
+    transition: transform 0.85s cubic-bezier(.2,.8,.2,1),
+                opacity 0.65s ease;
 }
 
-.cookie-half.left {
-    left: 0;
-    border-radius: 75% 35% 20% 70%;
-    clip-path: polygon(0 0, 100% 14%, 80% 100%, 0 83%);
-    transform: rotate(-8deg);
+.cookie-button:hover #leftHalf {
+    transform: translateX(-3px) rotate(-2deg);
 }
 
-.cookie-half.right {
-    right: 0;
-    border-radius: 35% 75% 70% 20%;
-    clip-path: polygon(0 14%, 100% 0, 100% 83%, 20% 100%);
-    transform: rotate(8deg);
+.cookie-button:hover #rightHalf {
+    transform: translateX(3px) rotate(2deg);
 }
 
-.cookie-seam {
-    position: absolute;
-    width: 17px;
-    height: 57px;
-    left: 50%;
-    top: 27px;
-    transform: translateX(-50%);
-    border-left: 2px dashed rgba(143,88,42,0.6);
-    z-index: 2;
+#fortunePaper {
+    opacity: 0;
+    transform: translateY(35px) scale(0.7);
+    transform-origin: center;
+    transition: opacity 0.6s ease,
+                transform 0.75s cubic-bezier(.2,.8,.2,1);
 }
 
-.cookie-crumb {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #f4c47a;
-    border-radius: 50%;
+.cookie-button.broken #leftHalf {
+    transform: translate(-65px,-25px) rotate(-28deg);
     opacity: 0;
 }
 
-.crumb1 { left: 25%; top: 20%; }
-.crumb2 { right: 20%; top: 15%; }
-.crumb3 { left: 15%; bottom: 22%; }
-.crumb4 { right: 13%; bottom: 18%; }
-.crumb5 { left: 48%; top: 5%; }
-.crumb6 { right: 35%; bottom: 8%; }
-
-.cookie-button.broken .left {
-    animation: breakLeft 0.7s ease forwards;
-}
-
-.cookie-button.broken .right {
-    animation: breakRight 0.7s ease forwards;
-}
-
-@keyframes breakLeft {
-    to {
-        transform: translate(-65px, -25px) rotate(-35deg);
-        opacity: 0;
-    }
-}
-
-@keyframes breakRight {
-    to {
-        transform: translate(65px, -25px) rotate(35deg);
-        opacity: 0;
-    }
-}
-
-.cookie-button.broken .cookie-seam {
+.cookie-button.broken #rightHalf {
+    transform: translate(65px,-25px) rotate(28deg);
     opacity: 0;
 }
 
-.cookie-button.broken .cookie-crumb {
-    animation: crumbFly 0.65s ease forwards;
+.cookie-button.broken #fortunePaper {
+    opacity: 1;
+    transform: translateY(-17px) scale(1);
 }
 
-@keyframes crumbFly {
-    to {
-        opacity: 0;
-        transform: translate(var(--x), var(--y)) scale(0.3);
-    }
+.cookie-button.broken {
+    pointer-events: none;
+}
+
+.cookie-instruction {
+    margin: 8px 0 0;
+    color: #e9cadb;
+    font-size: 13px;
 }
 
 .open-button {
@@ -218,48 +194,27 @@ p {
     transform: translateY(-2px);
 }
 
-#message {
-    display: none;
-    margin-top: 20px;
-    animation: paperAppear 0.9s ease forwards;
+.open-button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    transform: none;
 }
 
-@keyframes paperAppear {
-    from {
-        opacity: 0;
-        transform: translateY(35px) rotate(-3deg);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) rotate(0);
-    }
+/* GLÜCKSBOTSCHAFT */
+
+#message {
+    display: none;
+    animation: appear 0.9s ease;
 }
 
 .paper {
     position: relative;
-    padding: 26px 19px;
-    background: #f4e5d0;
-    border-radius: 4px 4px 13px 13px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    padding: 27px 20px;
+    margin-top: 25px;
+    background: linear-gradient(145deg, #fff0d9, #edd3b2);
+    border-radius: 5px 5px 13px 13px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     color: #55404b;
-}
-
-.paper::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: 0;
-    width: 100%;
-    height: 16px;
-    background: #f4e5d0;
-    clip-path: polygon(
-        0% 50%, 5% 0%, 10% 50%, 15% 0%,
-        20% 50%, 25% 0%, 30% 50%, 35% 0%,
-        40% 50%, 45% 0%, 50% 50%, 55% 0%,
-        60% 50%, 65% 0%, 70% 50%, 75% 0%,
-        80% 50%, 85% 0%, 90% 50%, 95% 0%,
-        100% 50%, 100% 100%, 0% 100%
-    );
 }
 
 .paper-label {
@@ -272,7 +227,7 @@ p {
 
 .paper h2 {
     color: #75425f;
-    font-size: 24px;
+    font-size: 23px;
     margin: 0 0 20px;
 }
 
@@ -295,7 +250,7 @@ p {
 }
 
 .paper-heart {
-    font-size: 24px;
+    font-size: 25px;
     margin-top: 20px;
     color: #c36e98;
 }
@@ -314,13 +269,6 @@ p {
 
     h1 {
         font-size: 28px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
     }
 }
 </style>
@@ -352,42 +300,214 @@ p {
 
         <div class="cookie-area">
 
-            <button class="cookie-button"
-                    id="cookieButton"
-                    onclick="openCookie()"
-                    aria-label="Glückskeks öffnen"
-                    type="button">
+            <button
+                class="cookie-button"
+                id="cookieButton"
+                onclick="openCookie()"
+                aria-label="Glückskeks öffnen"
+                type="button">
 
-                <div class="cookie">
+                <svg class="cookie-svg"
+                     viewBox="0 0 300 210"
+                     xmlns="http://www.w3.org/2000/svg">
 
-                    <div class="cookie-half left"></div>
-                    <div class="cookie-half right"></div>
-                    <div class="cookie-seam"></div>
+                    <defs>
 
-                    <span class="cookie-crumb crumb1"
-                        style="--x:-30px;--y:-35px;"></span>
-                    <span class="cookie-crumb crumb2"
-                        style="--x:35px;--y:-30px;"></span>
-                    <span class="cookie-crumb crumb3"
-                        style="--x:-30px;--y:30px;"></span>
-                    <span class="cookie-crumb crumb4"
-                        style="--x:35px;--y:35px;"></span>
-                    <span class="cookie-crumb crumb5"
-                        style="--x:0px;--y:-40px;"></span>
-                    <span class="cookie-crumb crumb6"
-                        style="--x:25px;--y:40px;"></span>
+                        <linearGradient id="cookieGold" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#fff0bd"/>
+                            <stop offset="22%" stop-color="#f5cf85"/>
+                            <stop offset="52%" stop-color="#d99a4c"/>
+                            <stop offset="78%" stop-color="#bd7739"/>
+                            <stop offset="100%" stop-color="#f2c47b"/>
+                        </linearGradient>
 
-                </div>
+                        <linearGradient id="cookieLight" x1="0" y1="0" x2="0.8" y2="1">
+                            <stop offset="0%" stop-color="#fff0c4"/>
+                            <stop offset="50%" stop-color="#edbb70"/>
+                            <stop offset="100%" stop-color="#c18442"/>
+                        </linearGradient>
+
+                        <linearGradient id="paperGradient" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#fff8e9"/>
+                            <stop offset="100%" stop-color="#ead8bb"/>
+                        </linearGradient>
+
+                        <filter id="cookieShadow" x="-30%" y="-30%" width="160%" height="160%">
+                            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+                            <feOffset dy="3"/>
+                            <feComponentTransfer>
+                                <feFuncA type="linear" slope="0.25"/>
+                            </feComponentTransfer>
+                            <feMerge>
+                                <feMergeNode/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+
+                    </defs>
+
+                    <!-- Schatten -->
+
+                    <ellipse cx="150" cy="170" rx="89" ry="13"
+                             fill="#130e13" opacity="0.4"/>
+
+                    <!-- Glückszettel im Inneren -->
+
+                    <g id="fortunePaper">
+                        <path d="M125 108 Q115 55 133 29
+                                 Q148 13 163 32
+                                 L178 108 Z"
+                              fill="url(#paperGradient)"
+                              stroke="#c6a67b"
+                              stroke-width="2"/>
+
+                        <path d="M134 48 Q150 39 165 48"
+                              stroke="#bd8d80"
+                              stroke-width="2"
+                              fill="none"/>
+
+                        <text x="149" y="73"
+                              text-anchor="middle"
+                              font-size="10"
+                              font-family="Georgia"
+                              fill="#955d75">LOVE</text>
+
+                        <path d="M144 85 L154 85"
+                              stroke="#bd8d80"
+                              stroke-width="1.5"/>
+                    </g>
+
+                    <!-- Linke Keks-Hälfte -->
+
+                    <g id="leftHalf">
+
+                        <path
+                            d="M151 119
+                               C128 91 104 49 66 39
+                               C38 29 22 55 35 89
+                               C49 124 86 151 120 148
+                               C136 147 146 134 151 119 Z"
+                            fill="url(#cookieGold)"
+                            stroke="#a96c35"
+                            stroke-width="3"
+                            filter="url(#cookieShadow)"/>
+
+                        <path
+                            d="M137 115
+                               C116 89 91 60 65 55
+                               C48 54 39 67 46 84"
+                            fill="none"
+                            stroke="#fff1c8"
+                            stroke-width="5"
+                            stroke-linecap="round"
+                            opacity="0.65"/>
+
+                        <path
+                            d="M65 40 Q83 66 100 91"
+                            stroke="#ae7036"
+                            stroke-width="3"
+                            fill="none"
+                            opacity="0.55"/>
+
+                        <path
+                            d="M119 99 Q127 112 137 121"
+                            stroke="#ffe4aa"
+                            stroke-width="3"
+                            fill="none"
+                            opacity="0.7"/>
+
+                        <path
+                            d="M51 102 Q79 139 113 137"
+                            stroke="#a96c35"
+                            stroke-width="2"
+                            fill="none"
+                            opacity="0.45"/>
+
+                        <ellipse cx="78" cy="67" rx="3" ry="2"
+                                 fill="#fff1c8" opacity="0.7"/>
+                        <ellipse cx="98" cy="87" rx="2.5" ry="2"
+                                 fill="#9c622e" opacity="0.5"/>
+                        <ellipse cx="68" cy="112" rx="3" ry="2"
+                                 fill="#f8d79b"/>
+
+                    </g>
+
+                    <!-- Rechte Keks-Hälfte -->
+
+                    <g id="rightHalf">
+
+                        <path
+                            d="M149 119
+                               C172 91 196 49 234 39
+                               C262 29 278 55 265 89
+                               C251 124 214 151 180 148
+                               C164 147 154 134 149 119 Z"
+                            fill="url(#cookieLight)"
+                            stroke="#a96c35"
+                            stroke-width="3"
+                            filter="url(#cookieShadow)"/>
+
+                        <path
+                            d="M163 115
+                               C184 89 209 60 235 55
+                               C252 54 261 67 254 84"
+                            fill="none"
+                            stroke="#fff1c8"
+                            stroke-width="5"
+                            stroke-linecap="round"
+                            opacity="0.65"/>
+
+                        <path
+                            d="M235 40 Q217 66 200 91"
+                            stroke="#ae7036"
+                            stroke-width="3"
+                            fill="none"
+                            opacity="0.55"/>
+
+                        <path
+                            d="M181 99 Q173 112 163 121"
+                            stroke="#ffe4aa"
+                            stroke-width="3"
+                            fill="none"
+                            opacity="0.7"/>
+
+                        <path
+                            d="M249 102 Q221 139 187 137"
+                            stroke="#a96c35"
+                            stroke-width="2"
+                            fill="none"
+                            opacity="0.45"/>
+
+                        <ellipse cx="222" cy="67" rx="3" ry="2"
+                                 fill="#fff1c8" opacity="0.7"/>
+                        <ellipse cx="202" cy="87" rx="2.5" ry="2"
+                                 fill="#9c622e" opacity="0.5"/>
+                        <ellipse cx="232" cy="112" rx="3" ry="2"
+                                 fill="#f8d79b"/>
+
+                    </g>
+
+                    <!-- Zentrale goldene Falte -->
+
+                    <path d="M146 116 Q150 104 154 116"
+                          stroke="#a76834"
+                          stroke-width="3"
+                          fill="none"
+                          stroke-linecap="round"
+                          id="cookieFold"/>
+
+                </svg>
 
             </button>
 
-            <p style="font-size:13px; color:#d7bdcf;">
-                Tippe auf den Glückskeks, um ihn zu öffnen.
+            <p class="cookie-instruction">
+                Tippe auf den Glückskeks, um ihn zu öffnen. ✨
             </p>
 
         </div>
 
-        <button class="open-button" onclick="openCookie()">
+        <button class="open-button" id="openButton"
+                onclick="openCookie()">
             Glückskeks öffnen ✨
         </button>
 
@@ -462,8 +582,7 @@ function openCookie() {
 
     button.classList.add("broken");
 
-    document.querySelector(".open-button").disabled = true;
-    document.querySelector(".open-button").style.opacity = "0.5";
+    document.getElementById("openButton").disabled = true;
 
     setTimeout(function() {
 
@@ -476,7 +595,7 @@ function openCookie() {
             behavior: "smooth"
         });
 
-    }, 750);
+    }, 850);
 
 }
 
