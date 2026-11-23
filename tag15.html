@@ -1,0 +1,782 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 15 – Weihnachtssuche ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #352039 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    padding: 28px 20px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    animation: appear .7s ease;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 27px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 27px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 29px;
+    margin: 0 0 14px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 22px auto;
+    border-radius: 5px;
+}
+
+/* SUCHFORTSCHRITT */
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #e7bfd5;
+    font-size: 12px;
+    margin: 20px 0 9px;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 7px;
+    background: #3c2c3c;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #cf79a5, #ffd0e6);
+    border-radius: 10px;
+    transition: width .4s;
+}
+
+/* GEGENSTÄNDELISTE */
+
+.objects {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: 16px 0;
+}
+
+.object-item {
+    padding: 7px 10px;
+    background: #302330;
+    border: 1px solid #68405d;
+    border-radius: 9px;
+    color: #e8c5da;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.object-item.found {
+    background: #493447;
+    color: #ffafd3;
+    text-decoration: line-through;
+    opacity: .55;
+}
+
+/* WIMMELBILD */
+
+.scene {
+    width: 100%;
+    aspect-ratio: 340 / 420;
+    position: relative;
+    margin: 20px auto;
+    overflow: hidden;
+    border: 2px solid #79516d;
+    border-radius: 15px;
+    background:
+        radial-gradient(ellipse at 50% 40%, #5b4051, transparent 70%),
+        linear-gradient(180deg, #362435 0%, #493241 70%, #241922 100%);
+    box-shadow: inset 0 0 35px rgba(0,0,0,.4),
+                0 12px 25px rgba(0,0,0,.3);
+}
+
+/* Wanddekoration */
+
+.wall-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .35;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 83px,
+            rgba(15,10,17,.18) 84px 86px
+        );
+}
+
+/* Fenster */
+
+.window {
+    position: absolute;
+    right: 7%;
+    top: 7%;
+    width: 32%;
+    height: 29%;
+    border: 7px solid #573b49;
+    border-radius: 6px;
+    background:
+        radial-gradient(circle at 25% 25%, #fff4d6 0 3px, transparent 4px),
+        radial-gradient(circle at 80% 36%, #fff 0 2px, transparent 3px),
+        radial-gradient(circle at 60% 70%, #fff 0 3px, transparent 4px),
+        linear-gradient(145deg, #263047, #48526a);
+    box-shadow: 0 0 15px rgba(180,190,255,.16);
+}
+
+.window::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 100%;
+    width: 5px;
+    background: #725267;
+}
+
+.window::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    height: 5px;
+    width: 100%;
+    background: #725267;
+}
+
+.window-moon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 16%;
+    top: 16%;
+    border-radius: 50%;
+    background: #ffe8bb;
+    box-shadow: 0 0 15px #ffe7b0;
+}
+
+/* Bilder an der Wand */
+
+.wall-frame {
+    position: absolute;
+    width: 35px;
+    height: 45px;
+    top: 18%;
+    left: 8%;
+    border: 4px solid #bf9569;
+    background: #322c42;
+    box-shadow: 0 4px 7px rgba(0,0,0,.3);
+}
+
+.wall-frame::after {
+    content: "♥";
+    color: #e5a5c9;
+    display: block;
+    text-align: center;
+    font-size: 17px;
+    margin-top: 5px;
+}
+
+/* Weihnachtsbaum */
+
+.tree {
+    position: absolute;
+    left: 5%;
+    top: 29%;
+    width: 43%;
+    height: 46%;
+    pointer-events: none;
+}
+
+.tree-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 42px solid transparent;
+    border-right: 42px solid transparent;
+    border-bottom: 90px solid #32705a;
+    filter: drop-shadow(0 0 7px rgba(79,144,101,.2));
+}
+
+.tree-middle {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 61px solid transparent;
+    border-right: 61px solid transparent;
+    border-bottom: 105px solid #285b4b;
+}
+
+.tree-bottom {
+    position: absolute;
+    top: 48%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 77px solid transparent;
+    border-right: 77px solid transparent;
+    border-bottom: 100px solid #214f43;
+}
+
+.tree-trunk {
+    position: absolute;
+    bottom: 0;
+    left: 43%;
+    width: 25px;
+    height: 32px;
+    background: #754c36;
+}
+
+.ornament {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #f5b3ce;
+    border-radius: 50%;
+    box-shadow: 0 0 9px #ffaccf;
+}
+
+.ornament.o1 { top: 35%; left: 21%; }
+.ornament.o2 { top: 50%; left: 72%; background: #f2d28e; }
+.ornament.o3 { top: 72%; left: 35%; }
+.ornament.o4 { top: 80%; left: 74%; background: #f2d28e; }
+
+/* Kamin */
+
+.fireplace {
+    position: absolute;
+    right: 5%;
+    bottom: 18%;
+    width: 39%;
+    height: 37%;
+    border: 7px solid #654451;
+    border-radius: 5px 5px 0 0;
+    background: #211922;
+    box-shadow: inset 0 0 15px #09080c;
+}
+
+.fireplace::before {
+    content: "";
+    position: absolute;
+    top: -14px;
+    left: -8px;
+    right: -8px;
+    height: 13px;
+    background: #966b64;
+    border-radius: 3px;
+}
+
+.fire {
+    position: absolute;
+    bottom: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: clamp(30px, 12vw, 50px);
+    filter: drop-shadow(0 0 8px #ff873e);
+    animation: fire 1.3s ease-in-out infinite alternate;
+}
+
+@keyframes fire {
+    from { transform: translateX(-50%) scale(.93); }
+    to { transform: translateX(-50%) scale(1.08); }
+}
+
+/* Boden und Teppich */
+
+.floor {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 19%;
+    border-top: 5px solid #64404c;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #38232e 0 45px,
+            #422b38 46px 48px
+        );
+}
+
+.rug {
+    position: absolute;
+    width: 55%;
+    height: 10%;
+    bottom: 4%;
+    left: 20%;
+    background: radial-gradient(ellipse, #93566e, #5b344f);
+    border: 2px solid #bc8199;
+    border-radius: 50%;
+    opacity: .85;
+}
+
+/* Kleiner Tisch */
+
+.table {
+    position: absolute;
+    bottom: 14%;
+    left: 40%;
+    width: 23%;
+    height: 9%;
+    background: #825541;
+    border-top: 7px solid #bd926e;
+    border-radius: 4px 4px 0 0;
+}
+
+.table::before {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 32px;
+    left: 10%;
+    bottom: -32px;
+    background: #744b3e;
+}
+
+.table::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 32px;
+    right: 10%;
+    bottom: -32px;
+    background: #744b3e;
+}
+
+/* Versteckte Gegenstände */
+
+.hidden-item {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 13%;
+    aspect-ratio: 1;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: white;
+    font-size: clamp(17px, 6vw, 28px);
+    line-height: 1;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 3px #170e16);
+    transition: transform .25s, opacity .3s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.hidden-item:hover {
+    transform: scale(1.25);
+}
+
+.hidden-item:focus-visible {
+    outline: 2px solid #ffd0e6;
+}
+
+.hidden-item.collected {
+    opacity: 0;
+    transform: scale(2) rotate(60deg);
+    pointer-events: none;
+}
+
+/* Positionen */
+
+#item-star {
+    left: 17%;
+    top: 29%;
+}
+
+#item-gift {
+    right: 13%;
+    bottom: 10%;
+}
+
+#item-bell {
+    left: 47%;
+    top: 10%;
+}
+
+#item-cookie {
+    left: 43%;
+    bottom: 23%;
+}
+
+#item-snow {
+    right: 10%;
+    top: 13%;
+}
+
+/* Status */
+
+.status {
+    min-height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f3b5d3;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Abschluss */
+
+#success {
+    display: none;
+    animation: appear .8s ease;
+}
+
+.final-box {
+    padding: 23px 18px;
+    margin-top: 22px;
+    background: linear-gradient(145deg, #382b3c, #251c2a);
+    border: 1px solid #79516d;
+    border-radius: 17px;
+}
+
+.gift-icon {
+    font-size: 55px;
+    margin: 10px 0;
+}
+
+.final-box h2 {
+    color: #ffd0e6;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 24px;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 27px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 25px 14px;
+    }
+
+    .hidden-item {
+        width: 14%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 15</div>
+
+    <!-- START -->
+
+    <div id="startScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Die geheime Weihnachtssuche</h1>
+
+        <p>
+            Im Weihnachtszimmer haben sich fünf
+            Gegenstände versteckt.
+
+            <br><br>
+
+            Kannst du alle finden? 🎄
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="objects">
+            <span class="object-item" id="list-star">⭐ Stern</span>
+            <span class="object-item" id="list-gift">🎁 Geschenk</span>
+            <span class="object-item" id="list-bell">🔔 Glocke</span>
+            <span class="object-item" id="list-cookie">🍪 Lebkuchen</span>
+            <span class="object-item" id="list-snow">❄️ Schneeflocke</span>
+        </div>
+
+        <div class="progress-info">
+            <span>Gefundene Gegenstände</span>
+            <span id="count">0 / 5</span>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <!-- WEIHNACHTSZIMMER -->
+
+        <div class="scene" id="scene">
+
+            <div class="wall-decoration"></div>
+
+            <div class="window">
+                <div class="window-moon"></div>
+            </div>
+
+            <div class="wall-frame"></div>
+
+            <div class="tree">
+                <div class="tree-top"></div>
+                <div class="tree-middle"></div>
+                <div class="tree-bottom"></div>
+                <div class="tree-trunk"></div>
+
+                <div class="ornament o1"></div>
+                <div class="ornament o2"></div>
+                <div class="ornament o3"></div>
+                <div class="ornament o4"></div>
+            </div>
+
+            <div class="fireplace">
+                <div class="fire">🔥</div>
+            </div>
+
+            <div class="table"></div>
+
+            <div class="rug"></div>
+            <div class="floor"></div>
+
+            <!-- FIND-OBJEKTE -->
+
+            <button class="hidden-item"
+                    id="item-star"
+                    onclick="findItem('star')"
+                    aria-label="Stern finden">
+                ⭐
+            </button>
+
+            <button class="hidden-item"
+                    id="item-gift"
+                    onclick="findItem('gift')"
+                    aria-label="Geschenk finden">
+                🎁
+            </button>
+
+            <button class="hidden-item"
+                    id="item-bell"
+                    onclick="findItem('bell')"
+                    aria-label="Glocke finden">
+                🔔
+            </button>
+
+            <button class="hidden-item"
+                    id="item-cookie"
+                    onclick="findItem('cookie')"
+                    aria-label="Lebkuchen finden">
+                🍪
+            </button>
+
+            <button class="hidden-item"
+                    id="item-snow"
+                    onclick="findItem('snow')"
+                    aria-label="Schneeflocke finden">
+                ❄️
+            </button>
+
+        </div>
+
+        <div class="status" id="status">
+            Tippe auf die versteckten Gegenstände.
+        </div>
+
+        <div class="footer">
+            EIN KLEINES WEIHNACHTSSPIEL · 15
+        </div>
+
+    </div>
+
+
+    <!-- ABSCHLUSS -->
+
+    <div id="success">
+
+        <div class="heart">♥</div>
+
+        <h1>Alles gefunden!</h1>
+
+        <p>
+            Du hast alle fünf versteckten Dinge entdeckt! 🎄
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="final-box">
+
+            <div class="gift-icon">🎁</div>
+
+            <h2>Eine kleine Überraschung für dich</h2>
+
+            <p>
+                Ich hoffe, du hattest Spaß bei
+                der kleinen Weihnachtssuche.
+            </p>
+
+            <p>
+                Und jetzt darfst du dich auf
+                die nächste Überraschung freuen.
+            </p>
+
+            <div class="signature">
+                Ich liebe dich! ❤️
+            </div>
+
+        </div>
+
+        <div class="footer">
+            WEIHNACHTSSUCHE · 15
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const items = [
+    "star",
+    "gift",
+    "bell",
+    "cookie",
+    "snow"
+];
+
+const names = {
+    star: "Stern",
+    gift: "Geschenk",
+    bell: "Weihnachtsglocke",
+    cookie: "Lebkuchen",
+    snow: "Schneeflocke"
+};
+
+const found = new Set();
+
+function findItem(name) {
+
+    if (found.has(name)) {
+        return;
+    }
+
+    found.add(name);
+
+    // Gegenstand verschwinden lassen
+
+    const item = document.getElementById("item-" + name);
+
+    item.classList.add("collected");
+    item.disabled = true;
+
+    // In der Liste markieren
+
+    document.getElementById("list-" + name)
+        .classList.add("found");
+
+    // Fortschritt aktualisieren
+
+    const amount = found.size;
+
+    document.getElementById("count").textContent =
+        amount + " / 5";
+
+    document.getElementById("progress").style.width =
+        (amount / 5 * 100) + "%";
+
+    document.getElementById("status").textContent =
+        names[name] + " gefunden! ✨";
+
+    // Alle gefunden?
+
+    if (amount === 5) {
+
+        document.getElementById("status").textContent =
+            "Du hast alles gefunden! ❤️";
+
+        setTimeout(showSuccess, 650);
+
+    }
+
+}
+
+
+function showSuccess() {
+
+    document.getElementById("startScreen").style.display = "none";
+
+    document.getElementById("success").style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
