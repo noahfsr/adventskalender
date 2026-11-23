@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 12 – Unser Erinnerungs-Puzzle ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #291a29 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    animation: appear .7s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 28px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 29px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+.main-button {
+    width: 100%;
+    min-height: 49px;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(100deg, #ffd0e6, #e99bc7);
+    color: #21151e;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.main-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+.main-button:disabled {
+    opacity: .5;
+    cursor: default;
+    transform: none;
+}
+
+#gameScreen,
+#successScreen {
+    display: none;
+    animation: appear .6s ease;
+}
+
+.puzzle-info {
+    padding: 16px 13px;
+    margin: 22px 0;
+    background: #302330;
+    border: 1px solid #68405d;
+    border-radius: 14px;
+}
+
+.puzzle-info p {
+    font-size: 13px;
+    margin: 0;
+}
+
+.puzzle-counter {
+    color: #f2acd0;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.progress-bg {
+    height: 6px;
+    background: #493447;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #cf79a5, #ffd0e6);
+    transition: width .3s;
+}
+
+/* PUZZLE */
+
+.puzzle {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 1;
+    margin: 18px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 4px;
+    padding: 5px;
+    background: #60445a;
+    border: 1px solid #8b6380;
+    border-radius: 14px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.3);
+}
+
+.puzzle-tile {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    min-width: 0;
+    min-height: 0;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background: #302330;
+    cursor: pointer;
+    transition: border-color .2s, transform .2s;
+}
+
+.puzzle-tile img {
+    position: absolute;
+    width: 300%;
+    height: 300%;
+    max-width: none;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
+}
+
+.puzzle-tile.selected {
+    border: 3px solid #ffd0e6;
+    box-shadow: inset 0 0 15px #ff9acb;
+    transform: scale(.94);
+    z-index: 2;
+}
+
+.puzzle-tile:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+.puzzle-tile:disabled {
+    cursor: default;
+}
+
+.status {
+    min-height: 45px;
+    color: #f3bfd9;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.5;
+}
+
+.reset-button {
+    width: 100%;
+    min-height: 45px;
+    padding: 12px;
+    margin-top: 8px;
+    background: #342433;
+    border: 1px solid #68405d;
+    border-radius: 13px;
+    color: #f4c3dd;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ABSCHLUSS */
+
+.completed-photo {
+    width: 100%;
+    max-height: 330px;
+    object-fit: contain;
+    background: #151019;
+    border: 5px solid #a77c58;
+    border-radius: 8px;
+    margin: 18px 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+.message {
+    padding: 22px 18px;
+    margin-top: 20px;
+    background: #302330;
+    border: 1px solid #79516d;
+    border-radius: 17px;
+    text-align: left;
+}
+
+.message p {
+    line-height: 1.9;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 24px;
+}
+
+.error {
+    color: #ffb6ca;
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 27px 17px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 12</div>
+
+    <!-- STARTSEITE -->
+
+    <div id="startScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Ein Erinnerungs-Puzzle</h1>
+
+        <p>
+            Heute wartet eine unserer Erinnerungen
+            auf dich.
+
+            <br><br>
+
+            Allerdings ist etwas durcheinandergeraten.
+            Kannst du das Bild wieder zusammensetzen? ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="puzzle-info">
+            <p>
+                Das Bild besteht aus neun Teilen.
+                Tippe immer zwei Teile nacheinander an,
+                um ihre Plätze zu tauschen.
+            </p>
+        </div>
+
+        <button class="main-button"
+                id="startButton"
+                onclick="startGame()">
+            Puzzle starten 🧩
+        </button>
+
+        <p id="loadError" class="error" style="display:none;"></p>
+
+    </div>
+
+
+    <!-- SPIEL -->
+
+    <div id="gameScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Setze die Erinnerung zusammen</h1>
+
+        <div class="puzzle-counter" id="moveCounter">
+            Tausche zwei Teile miteinander.
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="puzzle" id="puzzleBoard"></div>
+
+        <div class="status" id="status">
+            Wähle das erste Puzzleteil aus.
+        </div>
+
+        <button class="reset-button" onclick="resetPuzzle()">
+            Puzzle neu mischen ↻
+        </button>
+
+    </div>
+
+
+    <!-- FERTIG -->
+
+    <div id="successScreen">
+
+        <div class="heart">♥</div>
+
+        <h1>Du hast es geschafft!</h1>
+
+        <p>
+            Unsere Erinnerung ist wieder vollständig. ❤️
+        </p>
+
+        <img
+            class="completed-photo"
+            id="completedPhoto"
+            alt="Unsere gemeinsame Erinnerung"
+        >
+
+        <div class="message">
+
+            <p>
+                Manchmal braucht es nur einen kleinen Moment,
+                um sich an etwas Wunderschönes zu erinnern.
+            </p>
+
+            <p>
+                Dieses Bild ist eine unserer gemeinsamen
+                Erinnerungen.
+            </p>
+
+            <p>
+                Und ich hoffe, dass noch ganz viele
+                dazukommen.
+            </p>
+
+            <p>
+                Auf viele weitere schöne Momente mit dir!
+            </p>
+
+            <div class="signature">
+                Ich liebe dich. ❤️
+            </div>
+
+        </div>
+
+        <div class="footer">
+            UNSERE ERINNERUNG · 12
+        </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+    <div class="tag" style="margin-bottom:0;">
+        EIN KLEINES STÜCK VON UNS · 12
+    </div>
+
+</div>
+
+
+<script>
+
+// Dein erstes hochgeladenes Foto
+const PHOTO_URL = "museum/fotos/bild1.jpeg";
+
+const TOTAL_TILES = 9;
+
+let order = [];
+let selectedSlot = null;
+let moveCount = 0;
+let completed = false;
+
+
+// Zufällige Reihenfolge erstellen
+
+function shuffleTiles() {
+
+    const numbers = Array.from(
+        { length: TOTAL_TILES },
+        (_, index) => index
+    );
+
+    let shuffled;
+
+    do {
+
+        shuffled = [...numbers];
+
+        for (let i = shuffled.length - 1; i > 0; i--) {
+
+            const random = Math.floor(Math.random() * (i + 1));
+
+            [shuffled[i], shuffled[random]] =
+                [shuffled[random], shuffled[i]];
+
+        }
+
+    } while (
+        shuffled.every((value, index) => value === index)
+    );
+
+    return shuffled;
+}
+
+
+// Spiel starten
+
+function startGame() {
+
+    const button = document.getElementById("startButton");
+    const error = document.getElementById("loadError");
+
+    button.disabled = true;
+    button.textContent = "Foto wird geladen ...";
+
+    const imageTest = new Image();
+
+    imageTest.onload = function() {
+
+        document.getElementById("startScreen").style.display = "none";
+        document.getElementById("gameScreen").style.display = "block";
+
+        resetPuzzle();
+
+    };
+
+    imageTest.onerror = function() {
+
+        button.disabled = false;
+        button.textContent = "Puzzle starten 🧩";
+
+        error.style.display = "block";
+        error.textContent =
+            "Das Foto konnte nicht geladen werden. Bitte prüfe, ob museum/fotos/bild1.jpeg auf GitHub vorhanden ist.";
+
+    };
+
+    imageTest.src = PHOTO_URL;
+
+}
+
+
+// Puzzleteile anzeigen
+
+function renderPuzzle() {
+
+    const board = document.getElementById("puzzleBoard");
+
+    board.innerHTML = "";
+
+    order.forEach(function(piece, slot) {
+
+        const row = Math.floor(piece / 3);
+        const column = piece % 3;
+
+        const tile = document.createElement("button");
+
+        tile.type = "button";
+        tile.className = "puzzle-tile";
+
+        tile.setAttribute(
+            "aria-label",
+            "Puzzleteil " + (slot + 1)
+        );
+
+        if (selectedSlot === slot) {
+            tile.classList.add("selected");
+            tile.setAttribute("aria-pressed", "true");
+        } else {
+            tile.setAttribute("aria-pressed", "false");
+        }
+
+        const img = document.createElement("img");
+
+        img.src = PHOTO_URL;
+        img.alt = "";
+        img.draggable = false;
+
+        img.style.left = (-column * 100) + "%";
+        img.style.top = (-row * 100) + "%";
+
+        tile.appendChild(img);
+
+        tile.addEventListener("click", function() {
+            selectTile(slot);
+        });
+
+        tile.disabled = completed;
+
+        board.appendChild(tile);
+
+    });
+
+}
+
+
+// Puzzleteil auswählen
+
+function selectTile(slot) {
+
+    if (completed) {
+        return;
+    }
+
+    // Erstes Teil auswählen
+
+    if (selectedSlot === null) {
+
+        selectedSlot = slot;
+        renderPuzzle();
+
+        document.getElementById("status").textContent =
+            "Jetzt wähle das zweite Teil aus.";
+
+        return;
+    }
+
+    // Gleiches Teil erneut anklicken
+
+    if (selectedSlot === slot) {
+
+        selectedSlot = null;
+        renderPuzzle();
+
+        document.getElementById("status").textContent =
+            "Wähle das erste Puzzleteil aus.";
+
+        return;
+    }
+
+    // Teile tauschen
+
+    const first = selectedSlot;
+
+    [order[first], order[slot]] =
+        [order[slot], order[first]];
+
+    selectedSlot = null;
+    moveCount++;
+
+    renderPuzzle();
+
+    document.getElementById("moveCounter").textContent =
+        "Getauschte Paare: " + moveCount;
+
+    document.getElementById("status").textContent =
+        "Gut gemacht! Suche das nächste passende Teil.";
+
+    updateProgress();
+
+    // Prüfen, ob das Puzzle fertig ist
+
+    if (isSolved()) {
+
+        completed = true;
+
+        setTimeout(showSuccess, 500);
+
+    }
+
+}
+
+
+// Fortschritt anzeigen
+
+function updateProgress() {
+
+    let correct = 0;
+
+    order.forEach(function(piece, index) {
+
+        if (piece === index) {
+            correct++;
+        }
+
+    });
+
+    document.getElementById("progress").style.width =
+        (correct / TOTAL_TILES * 100) + "%";
+
+}
+
+
+// Prüfen, ob alle Teile richtig liegen
+
+function isSolved() {
+
+    return order.every(function(piece, index) {
+        return piece === index;
+    });
+
+}
+
+
+// Puzzle neu mischen
+
+function resetPuzzle() {
+
+    completed = false;
+    selectedSlot = null;
+    moveCount = 0;
+
+    order = shuffleTiles();
+
+    document.getElementById("moveCounter").textContent =
+        "Tausche zwei Teile miteinander.";
+
+    document.getElementById("status").textContent =
+        "Wähle das erste Puzzleteil aus.";
+
+    document.getElementById("progress").style.width = "0%";
+
+    renderPuzzle();
+
+}
+
+
+// Erfolgsseite anzeigen
+
+function showSuccess() {
+
+    document.getElementById("gameScreen").style.display = "none";
+
+    const image = document.getElementById("completedPhoto");
+    image.src = PHOTO_URL;
+
+    document.getElementById("successScreen").style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+</script>
+
+</body>
+</html>
