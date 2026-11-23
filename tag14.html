@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 14 – Winterfenster ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #352039 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 390px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    animation: appear .7s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 30px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 28px;
+    margin-bottom: 17px;
+}
+
+h1 {
+    font-size: 29px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+/* WINTERFENSTER */
+
+.window-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 320 / 380;
+    padding: 8px;
+    margin: 25px auto 18px;
+    background: linear-gradient(
+        135deg,
+        #d9b0c9,
+        #76506d,
+        #e8bad5,
+        #674259
+    );
+    border-radius: 17px;
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.4),
+        0 0 25px rgba(235,170,207,.12);
+}
+
+.window-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 2px solid #957b9a;
+    border-radius: 10px;
+    background: #18233b;
+}
+
+/* Landschaft hinter dem Fenster */
+
+.window-scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(245,174,216,.22),
+            transparent 50%
+        ),
+        linear-gradient(
+            180deg,
+            #172137 0%,
+            #30334e 55%,
+            #71809a 100%
+        );
+}
+
+/* Sterne draußen */
+
+.sky-star {
+    position: absolute;
+    color: #ffe7fa;
+    text-shadow: 0 0 9px white;
+    opacity: .85;
+}
+
+.sky-star:nth-child(1) {
+    left: 12%;
+    top: 13%;
+}
+
+.sky-star:nth-child(2) {
+    left: 80%;
+    top: 20%;
+}
+
+.sky-star:nth-child(3) {
+    left: 25%;
+    top: 34%;
+}
+
+.sky-star:nth-child(4) {
+    left: 70%;
+    top: 43%;
+}
+
+/* Mond */
+
+.moon {
+    position: absolute;
+    top: 12%;
+    right: 18%;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff0d8;
+    box-shadow: 0 0 25px rgba(255,239,215,.6);
+}
+
+/* Berge und Schnee */
+
+.mountain {
+    position: absolute;
+    bottom: 26%;
+    width: 0;
+    height: 0;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-bottom: 135px solid #39435b;
+}
+
+.mountain.one {
+    left: -75px;
+}
+
+.mountain.two {
+    right: -75px;
+    border-bottom-color: #303b53;
+}
+
+.mountain.three {
+    left: 24%;
+    bottom: 24%;
+    border-left-width: 100px;
+    border-right-width: 100px;
+    border-bottom-width: 160px;
+    border-bottom-color: #48536d;
+}
+
+.snow-ground {
+    position: absolute;
+    bottom: 0;
+    height: 28%;
+    width: 100%;
+    background: linear-gradient(
+        180deg,
+        #c9d7e5,
+        #f1eaf0
+    );
+    clip-path: polygon(
+        0 35%, 20% 15%, 40% 35%,
+        65% 10%, 85% 26%, 100% 12%,
+        100% 100%, 0 100%
+    );
+}
+
+/* Das Herz im Fenster */
+
+.heart-behind {
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    transform: translate(-50%, -50%);
+    font-size: clamp(85px, 27vw, 115px);
+    color: #ff8fbe;
+    text-shadow:
+        0 0 12px #ff9acb,
+        0 0 30px #e97eae,
+        0 0 65px rgba(255,130,190,.7);
+    animation: pulse 1.8s ease-in-out infinite alternate;
+    z-index: 2;
+}
+
+@keyframes pulse {
+    from {
+        transform: translate(-50%, -50%) scale(.95);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1.08);
+    }
+}
+
+.scene-caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 10%;
+    z-index: 2;
+    color: #fff2fa;
+    font-size: 13px;
+    text-align: center;
+    text-shadow: 0 2px 8px #172137;
+}
+
+/* Frostebene */
+
+#frostCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    touch-action: none;
+    cursor: crosshair;
+    transition: opacity .9s ease;
+}
+
+.window-grid {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    border: 5px solid rgba(222,205,222,.48);
+    box-shadow: inset 0 0 12px rgba(255,255,255,.2);
+}
+
+/* Fortschritt */
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #d8b4cd;
+    font-size: 12px;
+    margin: 20px 0 9px;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 7px;
+    border-radius: 10px;
+    background: #3c2c3c;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #cf79a5, #ffd0e6);
+    border-radius: 10px;
+    transition: width .3s;
+}
+
+.status {
+    min-height: 40px;
+    color: #f3b5d3;
+    font-size: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Nachricht */
+
+#message {
+    display: none;
+    animation: appear .9s ease;
+}
+
+.message-box {
+    padding: 23px 19px;
+    margin-top: 23px;
+    background: linear-gradient(145deg, #302638, #29202f);
+    border: 1px solid #79516d;
+    border-radius: 17px;
+    text-align: left;
+}
+
+.message-box p {
+    line-height: 1.9;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 25px 16px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 14</div>
+
+    <div id="startScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Das beschlagene Winterfenster</h1>
+
+        <p>
+            Draußen ist es kalt und das Fenster
+            ist ganz beschlagen.
+        </p>
+
+        <p>
+            Wische mit deinem Finger oder
+            deiner Maus über das Glas und
+            entdecke, was sich dahinter verbirgt. ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="window-stage">
+
+            <div class="window-inner">
+
+                <div class="window-scene">
+
+                    <span class="sky-star">✦</span>
+                    <span class="sky-star">✧</span>
+                    <span class="sky-star">✦</span>
+                    <span class="sky-star">✧</span>
+
+                    <div class="moon"></div>
+
+                    <div class="mountain one"></div>
+                    <div class="mountain two"></div>
+                    <div class="mountain three"></div>
+
+                    <div class="snow-ground"></div>
+
+                    <div class="heart-behind">♥</div>
+
+                    <div class="scene-caption">
+                        Eine kleine Überraschung für dich
+                    </div>
+
+                </div>
+
+                <canvas
+                    id="frostCanvas"
+                    width="320"
+                    height="380">
+                </canvas>
+
+                <div class="window-grid"></div>
+
+            </div>
+
+        </div>
+
+        <div class="progress-info">
+            <span>Fenster freiwischen</span>
+            <span id="progressText">0 %</span>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="status" id="status">
+            Wische über das Fenster, um den Frost zu entfernen. ❄️
+        </div>
+
+    </div>
+
+
+    <!-- ÜBERRASCHUNG -->
+
+    <div id="message">
+
+        <div class="heart">♡</div>
+
+        <h1>Ein kleiner Winterzauber</h1>
+
+        <p>
+            Du hast entdeckt, was sich hinter dem
+            beschlagenen Fenster versteckt hat. ❤️
+        </p>
+
+        <div class="divider"></div>
+
+        <div class="message-box">
+
+            <p>
+                Manchmal muss man nur ein bisschen
+                genauer hinschauen, um zu sehen,
+                wie schön etwas sein kann.
+            </p>
+
+            <p>
+                Und genau so ist es auch mit den Momenten,
+                die wir gemeinsam erleben.
+            </p>
+
+            <p>
+                Ich freue mich auf alles,
+                was noch vor uns liegt.
+            </p>
+
+            <div class="signature">
+                Ich liebe dich. ❤️
+            </div>
+
+        </div>
+
+        <div class="footer">
+            EIN KLEINER WINTERMOMENT · 14
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const canvas = document.getElementById("frostCanvas");
+const ctx = canvas.getContext("2d");
+
+const WIDTH = canvas.width;
+const HEIGHT = canvas.height;
+
+let drawing = false;
+let previousPoint = null;
+let revealed = false;
+let strokeCount = 0;
+
+
+// Frost auf das Fenster zeichnen
+
+function createFrost() {
+
+    const gradient = ctx.createLinearGradient(
+        0, 0, WIDTH, HEIGHT
+    );
+
+    gradient.addColorStop(0, "#e9f0f3");
+    gradient.addColorStop(0.45, "#d6e0e8");
+    gradient.addColorStop(1, "#ecedf1");
+
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+    // Leichte durchscheinende Frostmuster
+
+    for (let i = 0; i < 220; i++) {
+
+        const x = Math.random() * WIDTH;
+        const y = Math.random() * HEIGHT;
+        const radius = Math.random() * 3 + 1;
+
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+
+        ctx.fillStyle = Math.random() > 0.5
+            ? "rgba(255,255,255,.55)"
+            : "rgba(153,176,194,.16)";
+
+        ctx.fill();
+    }
+
+    // Beschlagene Ränder
+
+    ctx.fillStyle = "rgba(255,255,255,.22)";
+
+    ctx.fillRect(0, 0, WIDTH, 18);
+    ctx.fillRect(0, HEIGHT - 18, WIDTH, 18);
+
+}
+
+
+// Maus- und Fingerposition ermitteln
+
+function getPosition(event) {
+
+    const rect = canvas.getBoundingClientRect();
+
+    return {
+        x: (event.clientX - rect.left) * WIDTH / rect.width,
+        y: (event.clientY - rect.top) * HEIGHT / rect.height
+    };
+
+}
+
+
+// Frost wegradieren
+
+function erase(point) {
+
+    ctx.globalCompositeOperation = "destination-out";
+
+    if (previousPoint) {
+
+        ctx.beginPath();
+        ctx.moveTo(previousPoint.x, previousPoint.y);
+        ctx.lineTo(point.x, point.y);
+
+        ctx.lineWidth = 55;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.stroke();
+
+    } else {
+
+        ctx.beginPath();
+        ctx.arc(point.x, point.y, 27, 0, Math.PI * 2);
+        ctx.fill();
+
+    }
+
+    previousPoint = point;
+
+}
+
+
+// Freigeriebene Fläche berechnen
+
+function checkProgress() {
+
+    if (revealed) {
+        return;
+    }
+
+    const pixels = ctx.getImageData(
+        0, 0, WIDTH, HEIGHT
+    ).data;
+
+    let transparent = 0;
+    let total = 0;
+
+    // Nur jeden achten Pixel prüfen
+
+    for (let i = 3; i < pixels.length; i += 4 * 8) {
+
+        total++;
+
+        if (pixels[i] < 30) {
+            transparent++;
+        }
+
+    }
+
+    const percentage = Math.round(
+        transparent / total * 100
+    );
+
+    document.getElementById("progressText").textContent =
+        percentage + " %";
+
+    document.getElementById("progress").style.width =
+        percentage + "%";
+
+    if (percentage >= 38) {
+        revealMessage();
+    }
+
+}
+
+
+// Fenster vollständig entdecken
+
+function revealMessage() {
+
+    if (revealed) {
+        return;
+    }
+
+    revealed = true;
+    drawing = false;
+
+    canvas.style.opacity = "0";
+    canvas.style.pointerEvents = "none";
+
+    document.getElementById("progressText").textContent = "100 %";
+    document.getElementById("progress").style.width = "100%";
+
+    document.getElementById("status").textContent =
+        "Du hast das Fenster freigelegt! ❤️";
+
+    setTimeout(function() {
+
+        document.getElementById("startScreen").style.display = "none";
+
+        document.getElementById("message").style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 1000);
+
+}
+
+
+// Zeichnen mit Maus oder Finger
+
+canvas.addEventListener("pointerdown", function(event) {
+
+    if (revealed) return;
+
+    event.preventDefault();
+
+    drawing = true;
+    previousPoint = null;
+
+    canvas.setPointerCapture(event.pointerId);
+
+    erase(getPosition(event));
+
+});
+
+
+canvas.addEventListener("pointermove", function(event) {
+
+    if (!drawing || revealed) return;
+
+    event.preventDefault();
+
+    erase(getPosition(event));
+
+    strokeCount++;
+
+    if (strokeCount % 5 === 0) {
+        checkProgress();
+    }
+
+});
+
+
+canvas.addEventListener("pointerup", function() {
+
+    drawing = false;
+    previousPoint = null;
+
+    checkProgress();
+
+});
+
+
+canvas.addEventListener("pointercancel", function() {
+
+    drawing = false;
+    previousPoint = null;
+
+});
+
+
+// Frost beim Laden erstellen
+
+createFrost();
+
+</script>
+
+</body>
+</html>
