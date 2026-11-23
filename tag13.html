@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 13 – Herz-Labyrinth ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #352039 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    padding: 30px 20px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    animation: appear .7s ease;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 28px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 29px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 29px;
+    margin: 0 0 15px;
+}
+
+h2 {
+    color: #ffd0e6;
+    font-size: 22px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+.main-button {
+    width: 100%;
+    min-height: 49px;
+    padding: 14px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(100deg, #ffd0e6, #e99bc7);
+    color: #21151e;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.main-button:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+#gameScreen,
+#successScreen {
+    display: none;
+    animation: appear .6s ease;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    color: #e7bfd5;
+    font-size: 12px;
+    margin: 20px 0 9px;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 6px;
+    background: #3c2c3c;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #cf79a5, #ffd0e6);
+    transition: width .2s;
+}
+
+/* LABYRINTH */
+
+.maze-wrapper {
+    width: 100%;
+    padding: 9px;
+    margin: 18px auto;
+    background: linear-gradient(145deg, #422b42, #211923);
+    border: 1px solid #79516d;
+    border-radius: 13px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.maze {
+    display: grid;
+    grid-template-columns: repeat(15, minmax(0, 1fr));
+    aspect-ratio: 1;
+    gap: 2px;
+    width: 100%;
+}
+
+.cell {
+    min-width: 0;
+    min-height: 0;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.wall {
+    background: linear-gradient(145deg, #68405d, #38263b);
+    border: 1px solid rgba(255,190,220,.08);
+    box-shadow: inset 0 0 5px rgba(0,0,0,.3);
+}
+
+.path {
+    background: #211a26;
+    box-shadow: inset 0 0 5px rgba(255,255,255,.025);
+}
+
+.player {
+    color: #ff8bc0;
+    font-size: clamp(12px, 4vw, 21px);
+    text-shadow: 0 0 5px #ff83b9, 0 0 13px #ed6fa8;
+    background: radial-gradient(circle, #573044, #281a2b);
+    animation: playerPulse .8s infinite alternate;
+    z-index: 2;
+}
+
+@keyframes playerPulse {
+    from {
+        transform: scale(.85);
+        text-shadow: 0 0 5px #ff83b9;
+    }
+    to {
+        transform: scale(1.12);
+        text-shadow: 0 0 8px #ff83b9, 0 0 17px #ed6fa8;
+    }
+}
+
+.goal {
+    color: #ffe49a;
+    font-size: clamp(12px, 4vw, 21px);
+    text-shadow: 0 0 7px #ffdc7e, 0 0 15px #ffc95c;
+    animation: goalGlow 1.2s infinite alternate;
+}
+
+@keyframes goalGlow {
+    from { transform: scale(.85); }
+    to { transform: scale(1.15); }
+}
+
+/* STEUERUNG */
+
+.controls {
+    display: grid;
+    grid-template-columns: repeat(3, 53px);
+    justify-content: center;
+    gap: 7px;
+    margin: 22px auto 10px;
+}
+
+.move-button {
+    width: 53px;
+    height: 48px;
+    border-radius: 11px;
+    border: 1px solid #79516d;
+    background: #342433;
+    color: #ffd0e6;
+    font-size: 23px;
+    font-weight: bold;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    transition: background .15s, transform .15s;
+}
+
+.move-button:active {
+    background: #794c70;
+    transform: scale(.92);
+}
+
+.controls-help {
+    color: #bda7b8;
+    font-size: 12px;
+    margin-top: 15px;
+}
+
+.status {
+    min-height: 30px;
+    color: #f3b5d3;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+/* ENDE */
+
+.final-box {
+    padding: 23px 18px;
+    margin-top: 22px;
+    background: linear-gradient(145deg, #382b3c, #251c2a);
+    border: 1px solid #79516d;
+    border-radius: 17px;
+    text-align: left;
+}
+
+.final-box p {
+    line-height: 1.9;
+}
+
+.final-heart {
+    color: #ff8fbe;
+    text-align: center;
+    font-size: 60px;
+    animation: playerPulse 1.2s infinite alternate;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 25px;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 28px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 25px 14px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .controls {
+        grid-template-columns: repeat(3, 50px);
+    }
+
+    .move-button {
+        width: 50px;
+        height: 46px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 13</div>
+
+
+    <!-- STARTSEITE -->
+
+    <div id="startScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Das kleine Herz-Labyrinth</h1>
+
+        <p>
+            Ein kleiner Weg, ein leuchtendes Herz
+            und ein Ziel, das auf dich wartet.
+        </p>
+
+        <div class="divider"></div>
+
+        <p>
+            Führe das Herz durch das Labyrinth
+            und finde den goldenen Stern.
+        </p>
+
+        <div style="font-size:45px; margin:25px 0;">
+            💗 ➜ ✨
+        </div>
+
+        <p style="font-size:13px;">
+            Am PC: Pfeiltasten oder WASD.<br>
+            Am Handy: Die Richtungstasten.
+        </p>
+
+        <button class="main-button" onclick="startGame()">
+            Labyrinth betreten ❤️
+        </button>
+
+    </div>
+
+
+    <!-- SPIEL -->
+
+    <div id="gameScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Finde den Stern!</h1>
+
+        <div class="game-info">
+            <span id="moveCounter">Schritte: 0</span>
+            <span>💗 Start → ⭐ Ziel</span>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="maze-wrapper">
+            <div class="maze" id="maze"></div>
+        </div>
+
+        <div class="status" id="status">
+            Suche deinen Weg zum Stern.
+        </div>
+
+        <div class="controls">
+
+            <div></div>
+            <button class="move-button" onclick="movePlayer(0,-1)"
+                    aria-label="Nach oben">↑</button>
+            <div></div>
+
+            <button class="move-button" onclick="movePlayer(-1,0)"
+                    aria-label="Nach links">←</button>
+            <button class="move-button" onclick="movePlayer(0,1)"
+                    aria-label="Nach unten">↓</button>
+            <button class="move-button" onclick="movePlayer(1,0)"
+                    aria-label="Nach rechts">→</button>
+
+        </div>
+
+        <p class="controls-help">
+            Nutze die Pfeiltasten oder die Knöpfe.
+        </p>
+
+    </div>
+
+
+    <!-- ZIEL ERREICHT -->
+
+    <div id="successScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Du hast deinen Weg gefunden!</h1>
+
+        <div class="divider"></div>
+
+        <div class="final-box">
+
+            <div class="final-heart">♥</div>
+
+            <p>
+                Manchmal ist der Weg nicht ganz gerade
+                und manchmal muss man ein paar Umwege gehen.
+            </p>
+
+            <p>
+                Aber die schönsten Dinge sind es wert,
+                entdeckt zu werden.
+            </p>
+
+            <p>
+                Ich bin froh, dass wir unseren
+                gemeinsamen Weg gehen.
+            </p>
+
+            <div class="signature">
+                Ich liebe dich. ❤️
+            </div>
+
+        </div>
+
+        <p>
+            Das war deine kleine Überraschung für heute.
+        </p>
+
+        <button class="main-button" onclick="restartGame()">
+            Labyrinth noch einmal spielen
+        </button>
+
+        <div class="footer">
+            UNSER KLEINER WEG · 13
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// Einstellungen
+
+const SIZE = 15;
+
+let maze = [];
+let player = { x: 1, y: 1 };
+let moves = 0;
+let playing = false;
+
+
+// Labyrinth zufällig erstellen
+
+function generateMaze() {
+
+    maze = Array.from(
+        { length: SIZE },
+        () => Array(SIZE).fill("#")
+    );
+
+    const visited = new Set();
+    const stack = [{ x: 0, y: 0 }];
+
+    function key(x, y) {
+        return x + "," + y;
+    }
+
+    maze[1][1] = ".";
+
+    visited.add(key(0, 0));
+
+    const directions = [
+        { x: 0, y: -1 },
+        { x: 0, y: 1 },
+        { x: -1, y: 0 },
+        { x: 1, y: 0 }
+    ];
+
+    while (stack.length > 0) {
+
+        const current = stack[stack.length - 1];
+
+        const options = directions
+            .map(direction => ({
+                x: current.x + direction.x,
+                y: current.y + direction.y,
+                direction: direction
+            }))
+            .filter(next =>
+                next.x >= 0 &&
+                next.x < 7 &&
+                next.y >= 0 &&
+                next.y < 7 &&
+                !visited.has(key(next.x, next.y))
+            );
+
+        if (options.length === 0) {
+
+            stack.pop();
+
+        } else {
+
+            const choice =
+                options[Math.floor(Math.random() * options.length)];
+
+            const nextX = choice.x;
+            const nextY = choice.y;
+
+            const currentGridX = current.x * 2 + 1;
+            const currentGridY = current.y * 2 + 1;
+
+            const nextGridX = nextX * 2 + 1;
+            const nextGridY = nextY * 2 + 1;
+
+            // Verbindung zwischen den Feldern öffnen
+
+            maze[currentGridY + choice.direction.y]
+                [currentGridX + choice.direction.x] = ".";
+
+            maze[nextGridY][nextGridX] = ".";
+
+            visited.add(key(nextX, nextY));
+
+            stack.push({
+                x: nextX,
+                y: nextY
+            });
+
+        }
+
+    }
+
+    maze[1][1] = "S";
+    maze[13][13] = "E";
+
+}
+
+
+// Labyrinth zeichnen
+
+function renderMaze() {
+
+    const board = document.getElementById("maze");
+
+    board.innerHTML = "";
+
+    for (let y = 0; y < SIZE; y++) {
+
+        for (let x = 0; x < SIZE; x++) {
+
+            const cell = document.createElement("div");
+
+            cell.className = "cell";
+
+            if (maze[y][x] === "#") {
+
+                cell.classList.add("wall");
+
+            } else {
+
+                cell.classList.add("path");
+
+            }
+
+            // Spieler
+
+            if (player.x === x && player.y === y) {
+
+                cell.classList.add("player");
+                cell.textContent = "♥";
+
+            }
+
+            // Ziel
+
+            else if (maze[y][x] === "E") {
+
+                cell.classList.add("goal");
+                cell.textContent = "★";
+
+            }
+
+            board.appendChild(cell);
+
+        }
+
+    }
+
+}
+
+
+// Spiel starten
+
+function startGame() {
+
+    generateMaze();
+
+    player = { x: 1, y: 1 };
+
+    moves = 0;
+
+    playing = true;
+
+    document.getElementById("startScreen").style.display = "none";
+
+    document.getElementById("successScreen").style.display = "none";
+
+    document.getElementById("gameScreen").style.display = "block";
+
+    document.getElementById("moveCounter").textContent = "Schritte: 0";
+
+    document.getElementById("progress").style.width = "0%";
+
+    document.getElementById("status").textContent =
+        "Suche deinen Weg zum Stern.";
+
+    renderMaze();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+// Spieler bewegen
+
+function movePlayer(dx, dy) {
+
+    if (!playing) {
+        return;
+    }
+
+    const nextX = player.x + dx;
+    const nextY = player.y + dy;
+
+    // Grenzen prüfen
+
+    if (
+        nextX < 0 ||
+        nextY < 0 ||
+        nextX >= SIZE ||
+        nextY >= SIZE
+    ) {
+        return;
+    }
+
+    // Wände blockieren
+
+    if (maze[nextY][nextX] === "#") {
+        return;
+    }
+
+    player.x = nextX;
+    player.y = nextY;
+
+    moves++;
+
+    document.getElementById("moveCounter").textContent =
+        "Schritte: " + moves;
+
+    // Fortschritt
+
+    const distance =
+        Math.abs(13 - player.x) +
+        Math.abs(13 - player.y);
+
+    const progress =
+        Math.max(0, Math.min(100, 100 - distance / 26 * 100));
+
+    document.getElementById("progress").style.width =
+        progress + "%";
+
+    renderMaze();
+
+    // Ziel erreicht?
+
+    if (maze[player.y][player.x] === "E") {
+
+        finishGame();
+
+    }
+
+}
+
+
+// Spiel beenden
+
+function finishGame() {
+
+    playing = false;
+
+    document.getElementById("status").textContent =
+        "Du hast den Stern gefunden! ❤️";
+
+    document.getElementById("progress").style.width = "100%";
+
+    setTimeout(function() {
+
+        document.getElementById("gameScreen").style.display = "none";
+
+        document.getElementById("successScreen").style.display = "block";
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }, 500);
+
+}
+
+
+// Noch einmal spielen
+
+function restartGame() {
+
+    document.getElementById("successScreen").style.display = "none";
+
+    startGame();
+
+}
+
+
+// Tastatursteuerung
+
+document.addEventListener("keydown", function(event) {
+
+    if (!playing) {
+        return;
+    }
+
+    const keys = {
+        "ArrowUp": [0, -1],
+        "ArrowDown": [0, 1],
+        "ArrowLeft": [-1, 0],
+        "ArrowRight": [1, 0],
+        "w": [0, -1],
+        "s": [0, 1],
+        "a": [-1, 0],
+        "d": [1, 0],
+        "W": [0, -1],
+        "S": [0, 1],
+        "A": [-1, 0],
+        "D": [1, 0]
+    };
+
+    if (keys[event.key]) {
+
+        event.preventDefault();
+
+        movePlayer(
+            keys[event.key][0],
+            keys[event.key][1]
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
