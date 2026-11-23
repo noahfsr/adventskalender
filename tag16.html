@@ -1,0 +1,824 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 16 – Dein Winterabend ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        radial-gradient(ellipse at top, #352039 0%, transparent 65%),
+        linear-gradient(160deg, #1b141d, #100e13);
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.card {
+    width: 100%;
+    max-width: 410px;
+    padding: 30px 22px;
+    background: #201820;
+    border: 1px solid #68405d;
+    border-radius: 26px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,.3);
+    animation: appear .7s ease;
+    overflow: hidden;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.tag {
+    color: #f0a1c9;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 28px;
+}
+
+.heart {
+    color: #ff9acb;
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-size: 29px;
+    margin: 0 0 15px;
+}
+
+p {
+    color: #f0e8ef;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.divider {
+    width: 55px;
+    height: 2px;
+    background: #d879a4;
+    margin: 23px auto;
+    border-radius: 5px;
+}
+
+/* FORTSCHRITT */
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #d8b4cd;
+    font-size: 12px;
+    margin: 22px 0 9px;
+}
+
+.progress-bg {
+    width: 100%;
+    height: 7px;
+    background: #3c2c3c;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #cf79a5, #ffd0e6);
+    border-radius: 10px;
+    transition: width .4s ease;
+}
+
+/* FRAGEN */
+
+#questionScreen,
+#voucherScreen {
+    display: none;
+    animation: appear .5s ease;
+}
+
+.question-number {
+    color: #e99abb;
+    font-size: 11px;
+    letter-spacing: 3px;
+    margin-bottom: 18px;
+}
+
+.question-title {
+    min-height: 65px;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 1.45;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.question-description {
+    color: #cdb9cb;
+    font-size: 13px;
+    margin: 15px 0 22px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+}
+
+.option {
+    width: 100%;
+    min-height: 68px;
+    padding: 13px 15px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: #342433;
+    border: 1px solid #68405d;
+    border-radius: 13px;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.option:hover {
+    background: #493447;
+    border-color: #e99abb;
+    transform: translateY(-2px);
+}
+
+.option.selected {
+    border: 2px solid #f0a1c9;
+    background: #523447;
+    box-shadow: 0 0 15px rgba(240,161,201,.12);
+}
+
+.option:disabled {
+    cursor: default;
+    opacity: .7;
+}
+
+.option-icon {
+    font-size: 29px;
+    min-width: 35px;
+    text-align: center;
+}
+
+.option-text {
+    flex: 1;
+}
+
+.option-text strong {
+    display: block;
+    color: #ffd0e6;
+    font-size: 15px;
+    margin-bottom: 4px;
+}
+
+.option-text small {
+    display: block;
+    color: #d6c1d1;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.option-check {
+    color: #ffc3df;
+    font-size: 20px;
+}
+
+.navigation {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.nav-button {
+    flex: 1;
+    min-height: 46px;
+    border-radius: 12px;
+    background: #342433;
+    border: 1px solid #68405d;
+    color: #f4c3dd;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-button:disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+/* GUTSCHEIN */
+
+.voucher {
+    position: relative;
+    padding: 25px 19px;
+    margin-top: 22px;
+    background: linear-gradient(145deg, #3b293b, #251d2a);
+    border: 1px solid #a87591;
+    border-radius: 17px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+.voucher::before,
+.voucher::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 17px;
+    height: 30px;
+    border-radius: 50%;
+    background: #201820;
+    transform: translateY(-50%);
+}
+
+.voucher::before {
+    left: -9px;
+}
+
+.voucher::after {
+    right: -9px;
+}
+
+.voucher-label {
+    color: #f2afce;
+    font-size: 10px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.voucher-icon {
+    font-size: 55px;
+    margin: 12px 0;
+}
+
+.voucher h2 {
+    color: #ffd0e6;
+    font-size: 25px;
+    margin: 12px 0;
+}
+
+.voucher-intro {
+    color: #e5ccdc;
+    font-size: 13px;
+}
+
+.selection-list {
+    text-align: left;
+    margin-top: 22px;
+    padding: 15px;
+    background: rgba(20,14,22,.35);
+    border-radius: 12px;
+}
+
+.selection-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    color: #f0dce9;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.selection-line:last-child {
+    border-bottom: none;
+}
+
+.selection-line span:first-child {
+    font-size: 21px;
+}
+
+.voucher-divider {
+    border-top: 1px dashed #a87591;
+    margin: 23px 0;
+}
+
+.voucher-message {
+    color: #f0dce9;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.signature {
+    color: #ffacd2;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.restart-button {
+    width: 100%;
+    min-height: 48px;
+    padding: 13px;
+    margin-top: 17px;
+    background: #342433;
+    border: 1px solid #68405d;
+    border-radius: 13px;
+    color: #f4c3dd;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.restart-button:hover {
+    background: #493447;
+}
+
+.footer {
+    color: #c28da9;
+    font-size: 10px;
+    letter-spacing: 2px;
+    margin-top: 27px;
+}
+
+@media (max-width: 400px) {
+    .card {
+        padding: 26px 17px;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .question-title {
+        font-size: 21px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="tag">NUR FÜR DICH · 16</div>
+
+
+    <!-- STARTSEITE -->
+
+    <div id="startScreen">
+
+        <div class="heart">♡</div>
+
+        <h1>Dein perfekter Winterabend</h1>
+
+        <p>
+            Heute darfst du dir deinen ganz persönlichen
+            Winterabend zusammenstellen.
+        </p>
+
+        <div class="divider"></div>
+
+        <div style="font-size:48px; margin:25px 0;">
+            ☕ ✨ 🕯️
+        </div>
+
+        <p>
+            Triff drei kleine Entscheidungen.
+            Am Ende wartet dein persönlicher
+            Gutschein auf dich. ❤️
+        </p>
+
+        <button class="main-button" onclick="startQuestions()"
+            style="width:100%;min-height:49px;padding:14px;margin-top:18px;
+            border:none;border-radius:13px;
+            background:linear-gradient(100deg,#ffd0e6,#e99bc7);
+            color:#21151e;font-size:15px;font-weight:bold;cursor:pointer;">
+            Abend zusammenstellen ✨
+        </button>
+
+    </div>
+
+
+    <!-- FRAGEN -->
+
+    <div id="questionScreen">
+
+        <div class="heart">♡</div>
+
+        <div class="progress-info">
+            <span id="stepText">Frage 1 von 3</span>
+            <span id="percentage">33 %</span>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <div class="question-number" id="questionNumber">
+            DEINE ERSTE ENTSCHEIDUNG
+        </div>
+
+        <div class="question-title" id="questionTitle"></div>
+
+        <p class="question-description" id="questionDescription"></p>
+
+        <div class="options" id="options"></div>
+
+        <div class="navigation">
+
+            <button class="nav-button" id="backButton"
+                onclick="previousQuestion()">
+                ← Zurück
+            </button>
+
+            <button class="nav-button" id="nextButton"
+                onclick="nextQuestion()" disabled>
+                Weiter →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- FERTIGER GUTSCHEIN -->
+
+    <div id="voucherScreen">
+
+        <div class="heart">♥</div>
+
+        <h1>Dein perfekter Abend!</h1>
+
+        <p>
+            Deine Auswahl steht fest.
+            Hier ist dein persönlicher Gutschein. ❤️
+        </p>
+
+        <div class="voucher">
+
+            <div class="voucher-label">
+                EIN GUTSCHEIN NUR FÜR DICH
+            </div>
+
+            <div class="voucher-icon">🎟️</div>
+
+            <h2>Ein Winterabend für uns</h2>
+
+            <p class="voucher-intro">
+                Du hast dir deinen perfekten Abend ausgesucht!
+            </p>
+
+            <div class="voucher-divider"></div>
+
+            <div class="selection-list">
+
+                <div class="selection-line">
+                    <span id="resultIcon1">☕</span>
+                    <span id="result1"></span>
+                </div>
+
+                <div class="selection-line">
+                    <span id="resultIcon2">🎬</span>
+                    <span id="result2"></span>
+                </div>
+
+                <div class="selection-line">
+                    <span id="resultIcon3">🕯️</span>
+                    <span id="result3"></span>
+                </div>
+
+            </div>
+
+            <div class="voucher-divider"></div>
+
+            <p class="voucher-message">
+                Drei Entscheidungen, ein gemütlicher Abend
+                und ganz viel gemeinsame Zeit.
+
+                <br><br>
+
+                Und das Beste: Diesen Abend verbringen wir zusammen!
+            </p>
+
+            <div class="signature">
+                Ich freue mich auf dich. ❤️
+            </div>
+
+        </div>
+
+        <button class="restart-button" onclick="restartQuestions()">
+            Gutschein neu gestalten ↻
+        </button>
+
+        <div class="footer">
+            DEIN WINTERABEND · 16
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// Alle Fragen und Antwortmöglichkeiten
+
+const questions = [
+
+    {
+        number: "DEINE ERSTE ENTSCHEIDUNG",
+        title: "Was darf an unserem Abend nicht fehlen?",
+        description: "Womit soll unser Winterabend beginnen?",
+        options: [
+            {
+                icon: "☕",
+                title: "Heiße Schokolade",
+                description: "Mit Sahne und Marshmallows."
+            },
+            {
+                icon: "🍪",
+                title: "Etwas Süßes",
+                description: "Leckereien für einen gemütlichen Abend."
+            },
+            {
+                icon: "🍿",
+                title: "Snacks",
+                description: "Eine große Auswahl zum Knabbern."
+            }
+        ]
+    },
+
+    {
+        number: "DEINE ZWEITE ENTSCHEIDUNG",
+        title: "Was möchtest du mit mir machen?",
+        description: "Worauf hättest du am meisten Lust?",
+        options: [
+            {
+                icon: "🎬",
+                title: "Einen Film schauen",
+                description: "Zurücklehnen und gemeinsam entspannen."
+            },
+            {
+                icon: "🎲",
+                title: "Ein Spiel spielen",
+                description: "Ein bisschen Spaß und Wettbewerb."
+            },
+            {
+                icon: "🎨",
+                title: "Etwas zusammen basteln",
+                description: "Gemeinsam kreativ werden."
+            }
+        ]
+    },
+
+    {
+        number: "DEINE DRITTE ENTSCHEIDUNG",
+        title: "Wie soll unser Abend aussehen?",
+        description: "Welche Stimmung gefällt dir am besten?",
+        options: [
+            {
+                icon: "🕯️",
+                title: "Gemütlich und ruhig",
+                description: "Kerzen, Decken und Entspannung."
+            },
+            {
+                icon: "🎄",
+                title: "Weihnachtlich und festlich",
+                description: "Lichter, Weihnachtsstimmung und Musik."
+            },
+            {
+                icon: "✨",
+                title: "Mit einer Überraschung",
+                description: "Ich habe noch etwas Besonderes geplant."
+            }
+        ]
+    }
+
+];
+
+
+let currentQuestion = 0;
+let answers = [null, null, null];
+
+
+// Start
+
+function startQuestions() {
+
+    document.getElementById("startScreen").style.display = "none";
+
+    document.getElementById("questionScreen").style.display = "block";
+
+    currentQuestion = 0;
+
+    showQuestion();
+
+}
+
+
+// Frage anzeigen
+
+function showQuestion() {
+
+    const question = questions[currentQuestion];
+
+    document.getElementById("stepText").textContent =
+        "Frage " + (currentQuestion + 1) + " von 3";
+
+    document.getElementById("percentage").textContent =
+        Math.round((currentQuestion + 1) / 3 * 100) + " %";
+
+    document.getElementById("progress").style.width =
+        ((currentQuestion + 1) / 3 * 100) + "%";
+
+    document.getElementById("questionNumber").textContent =
+        question.number;
+
+    document.getElementById("questionTitle").textContent =
+        question.title;
+
+    document.getElementById("questionDescription").textContent =
+        question.description;
+
+    const optionsContainer =
+        document.getElementById("options");
+
+    optionsContainer.innerHTML = "";
+
+    question.options.forEach(function(option, index) {
+
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "option";
+
+        if (answers[currentQuestion] === index) {
+            button.classList.add("selected");
+        }
+
+        const icon = document.createElement("span");
+        icon.className = "option-icon";
+        icon.textContent = option.icon;
+
+        const text = document.createElement("span");
+        text.className = "option-text";
+
+        const title = document.createElement("strong");
+        title.textContent = option.title;
+
+        const description = document.createElement("small");
+        description.textContent = option.description;
+
+        text.appendChild(title);
+        text.appendChild(description);
+
+        const check = document.createElement("span");
+        check.className = "option-check";
+        check.textContent =
+            answers[currentQuestion] === index ? "✓" : "›";
+
+        button.appendChild(icon);
+        button.appendChild(text);
+        button.appendChild(check);
+
+        button.addEventListener("click", function() {
+            selectOption(index);
+        });
+
+        optionsContainer.appendChild(button);
+
+    });
+
+    document.getElementById("backButton").disabled =
+        currentQuestion === 0;
+
+    document.getElementById("nextButton").disabled =
+        answers[currentQuestion] === null;
+
+    document.getElementById("nextButton").textContent =
+        currentQuestion === 2 ? "Gutschein erstellen ♥" : "Weiter →";
+
+}
+
+
+// Antwort auswählen
+
+function selectOption(index) {
+
+    answers[currentQuestion] = index;
+
+    showQuestion();
+
+    document.getElementById("nextButton").disabled = false;
+
+}
+
+
+// Zurück
+
+function previousQuestion() {
+
+    if (currentQuestion > 0) {
+
+        currentQuestion--;
+
+        showQuestion();
+
+    }
+
+}
+
+
+// Weiter
+
+function nextQuestion() {
+
+    if (answers[currentQuestion] === null) {
+        return;
+    }
+
+    if (currentQuestion < 2) {
+
+        currentQuestion++;
+
+        showQuestion();
+
+    } else {
+
+        showVoucher();
+
+    }
+
+}
+
+
+// Gutschein erstellen
+
+function showVoucher() {
+
+    for (let i = 0; i < 3; i++) {
+
+        const selected =
+            questions[i].options[answers[i]];
+
+        document.getElementById("resultIcon" + (i + 1))
+            .textContent = selected.icon;
+
+        document.getElementById("result" + (i + 1))
+            .textContent = selected.title;
+
+    }
+
+    document.getElementById("questionScreen").style.display = "none";
+
+    document.getElementById("voucherScreen").style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+// Neu beginnen
+
+function restartQuestions() {
+
+    answers = [null, null, null];
+    currentQuestion = 0;
+
+    document.getElementById("voucherScreen").style.display = "none";
+
+    document.getElementById("questionScreen").style.display = "block";
+
+    showQuestion();
+
+}
+
+</script>
+
+</body>
+</html>
