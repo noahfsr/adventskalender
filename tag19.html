@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 19 – Herz-Reaktionsspiel</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+    background:
+        radial-gradient(circle at top, #592b49, transparent 55%),
+        linear-gradient(145deg, #160e1b, #301526);
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding: 25px 18px;
+    border-radius: 24px;
+    background: #ffffff0c;
+    border: 1px solid #ffffff20;
+    box-shadow: 0 15px 45px #0005;
+}
+
+h1 {
+    color: #ffb8d1;
+    font-size: 27px;
+}
+
+.subtitle {
+    color: #e9ced8;
+    line-height: 1.6;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 22px 0;
+    gap: 10px;
+}
+
+.stat {
+    background: #ffffff12;
+    padding: 12px;
+    border-radius: 12px;
+    flex: 1;
+}
+
+.stat span {
+    display: block;
+    color: #ffb8d1;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#game {
+    position: relative;
+    height: 340px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 17px;
+    background:
+        radial-gradient(circle at center, #63304d, #25152e);
+    border: 1px solid #ffffff25;
+    touch-action: manipulation;
+}
+
+.target {
+    position: absolute;
+    border: none;
+    background: transparent;
+    padding: 0;
+    font-size: 38px;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    animation: pop 0.3s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.target:active {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
+@keyframes pop {
+    from {
+        opacity: 0;
+        scale: 0.4;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+button.start {
+    margin-top: 18px;
+    padding: 14px 27px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffb8d1, #e68eae);
+    color: #421c32;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button.start:hover {
+    transform: scale(1.04);
+}
+
+#result {
+    display: none;
+    margin-top: 22px;
+    padding: 20px;
+    background: #ffffff10;
+    border-radius: 16px;
+    line-height: 1.7;
+    animation: pop 0.6s ease;
+}
+
+#result h2 {
+    color: #ffb8d1;
+}
+
+.hint {
+    font-size: 13px;
+    color: #d9bdcc;
+    margin-top: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div style="font-size:38px;">💗</div>
+
+    <h1>Das Herz-Reaktionsspiel</h1>
+
+    <p class="subtitle">
+        Wie schnell bist du?<br>
+        Sammle in 30 Sekunden möglichst viele Herzen!
+    </p>
+
+    <div class="stats">
+        <div class="stat">
+            Punkte
+            <span id="score">0</span>
+        </div>
+
+        <div class="stat">
+            Zeit
+            <span id="time">30</span>
+        </div>
+    </div>
+
+    <div id="game">
+        <div id="placeholder" style="
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            color:#f3ccdc;
+            width:90%;
+            line-height:1.6;">
+            Drücke auf Start und fange die Herzen! ❤️
+        </div>
+    </div>
+
+    <button class="start" id="startButton" onclick="startGame()">
+        Spiel starten
+    </button>
+
+    <p class="hint">
+        ❤️ Herz = 1 Punkt &nbsp; ⭐ Stern = 3 Punkte
+    </p>
+
+    <div id="result">
+        <div style="font-size:55px;">💝</div>
+        <h2>Geschafft!</h2>
+        <p id="resultScore"></p>
+        <p id="resultMessage"></p>
+
+        <p>
+            Egal wie viele Punkte du hast:
+            Für mich bist du immer ein Volltreffer! ❤️
+        </p>
+
+        <button class="start" onclick="startGame()">
+            Nochmal spielen
+        </button>
+    </div>
+
+</div>
+
+<script>
+let score = 0;
+let time = 30;
+let timer;
+let playing = false;
+let spawnTimer;
+
+const game = document.getElementById("game");
+
+function startGame() {
+
+    if (playing) return;
+
+    score = 0;
+    time = 30;
+    playing = true;
+
+    document.getElementById("score").textContent = score;
+    document.getElementById("time").textContent = time;
+    document.getElementById("result").style.display = "none";
+    document.getElementById("startButton").style.display = "none";
+    document.getElementById("placeholder").style.display = "none";
+
+    game.innerHTML = "";
+
+    spawnTarget();
+
+    spawnTimer = setInterval(spawnTarget, 650);
+
+    timer = setInterval(() => {
+        time--;
+
+        document.getElementById("time").textContent = time;
+
+        if (time <= 0) {
+            endGame();
+        }
+    }, 1000);
+}
+
+function spawnTarget() {
+
+    if (!playing) return;
+
+    const target = document.createElement("button");
+    target.className = "target";
+
+    const isStar = Math.random() < 0.22;
+
+    target.textContent = isStar ? "⭐" : "❤️";
+    target.setAttribute("aria-label", isStar ? "Stern" : "Herz");
+
+    const maxX = game.clientWidth - 45;
+    const maxY = game.clientHeight - 45;
+
+    const x = 25 + Math.random() * (maxX - 25);
+    const y = 25 + Math.random() * (maxY - 25);
+
+    target.style.left = x + "px";
+    target.style.top = y + "px";
+
+    target.onclick = () => {
+
+        if (!playing) return;
+
+        score += isStar ? 3 : 1;
+
+        document.getElementById("score").textContent = score;
+
+        target.remove();
+    };
+
+    game.appendChild(target);
+
+    setTimeout(() => {
+        target.remove();
+    }, 1100);
+}
+
+function endGame() {
+
+    playing = false;
+
+    clearInterval(timer);
+    clearInterval(spawnTimer);
+
+    game.innerHTML = `
+        <div style="
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            font-size:65px;">
+            💖
+        </div>
+    `;
+
+    document.getElementById("resultScore").textContent =
+        "Du hast " + score + " Punkte gesammelt!";
+
+    let message;
+
+    if (score >= 35) {
+        message = "Wow! Du bist unglaublich schnell! ✨";
+    } else if (score >= 18) {
+        message = "Richtig gut gemacht! ❤️";
+    } else {
+        message = "Jeder Klick zählt – toll gespielt! 🌷";
+    }
+
+    document.getElementById("resultMessage").textContent = message;
+
+    document.getElementById("result").style.display = "block";
+    document.getElementById("startButton").style.display = "none";
+}
+</script>
+
+</body>
+</html>
