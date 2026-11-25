@@ -1,0 +1,395 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 24 – Frohe Weihnachten ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
+    background:
+        radial-gradient(circle at 20% 20%, #ffffff18 2px, transparent 3px),
+        radial-gradient(circle at 80% 70%, #ffffff20 2px, transparent 3px),
+        linear-gradient(145deg, #172b35, #263f48, #101d27);
+    background-size: 90px 90px, 130px 130px, cover;
+    color: #f8eee1;
+}
+
+.container {
+    width: 100%;
+    max-width: 650px;
+    text-align: center;
+}
+
+.day {
+    color: #e6c99d;
+    letter-spacing: 5px;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: clamp(30px, 7vw, 43px);
+    font-weight: normal;
+    margin: 0 0 10px;
+}
+
+.subtitle {
+    color: #d4c7b5;
+    font-size: 15px;
+    margin-bottom: 35px;
+}
+
+.envelope-area {
+    perspective: 1000px;
+    margin: 0 auto;
+    width: min(320px, 85vw);
+    height: 225px;
+    cursor: pointer;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #e8d5b9;
+    border-radius: 5px;
+    box-shadow: 0 15px 40px #0007;
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #d8bd99;
+    clip-path: polygon(0 0, 50% 58%, 100% 0);
+    z-index: 3;
+    transform-origin: top;
+    transition: transform 1s ease;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #c9a982;
+    clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+    z-index: 4;
+}
+
+.letter-inside {
+    position: absolute;
+    width: 88%;
+    height: 85%;
+    left: 6%;
+    top: 5%;
+    background: #fff9ed;
+    color: #704b3c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    transition: transform 1.2s ease;
+}
+
+.seal {
+    position: absolute;
+    z-index: 6;
+    width: 55px;
+    height: 55px;
+    background: #9c303b;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    box-shadow: 0 3px 8px #5a2020;
+    transition: opacity .4s;
+}
+
+.envelope.open::before {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope.open .letter-inside {
+    transform: translateY(-115px);
+}
+
+.envelope.open .seal {
+    opacity: 0;
+}
+
+.open-text {
+    margin-top: 30px;
+    color: #e6c99d;
+    font-size: 15px;
+}
+
+button {
+    border: 1px solid #d7b987;
+    background: #a33d46;
+    color: white;
+    border-radius: 30px;
+    padding: 14px 28px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: .2s;
+}
+
+button:hover {
+    background: #bd5059;
+    transform: scale(1.04);
+}
+
+.letter {
+    display: none;
+    margin: 35px auto 0;
+    max-width: 590px;
+    padding: clamp(25px, 6vw, 48px);
+    background:
+        radial-gradient(ellipse at top left, #ffffffaa, transparent 50%),
+        #f4e8d3;
+    color: #49382d;
+    border: 1px solid #d3b991;
+    border-radius: 4px;
+    box-shadow: 0 15px 50px #0007;
+    text-align: left;
+    line-height: 1.85;
+    animation: appear 1.3s ease forwards;
+    position: relative;
+}
+
+.letter::before {
+    content: "✦";
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #b48a59;
+    font-size: 24px;
+}
+
+.letter h2 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 27px;
+    color: #8d3c42;
+    margin: 5px 0 25px;
+}
+
+.letter p {
+    font-size: 16px;
+    margin-bottom: 17px;
+}
+
+.letter .end {
+    text-align: center;
+    font-size: 20px;
+    color: #9c303b;
+    margin-top: 30px;
+}
+
+.letter .signature {
+    text-align: right;
+    color: #8d3c42;
+    font-style: italic;
+    font-size: 19px;
+    margin-top: 25px;
+}
+
+.snow {
+    position: fixed;
+    top: -15px;
+    color: white;
+    opacity: .65;
+    pointer-events: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+@media(max-width: 500px) {
+    .letter p {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="day">24. DEZEMBER</div>
+
+    <h1>Ein Brief für dich ❤️</h1>
+
+    <p class="subtitle">
+        Das letzte Türchen ist etwas ganz Besonderes.
+    </p>
+
+    <div class="envelope-area" id="envelopeArea" onclick="openLetter()">
+        <div class="envelope" id="envelope">
+            <div class="letter-inside">Für dich ❤️</div>
+            <div class="seal">♥</div>
+        </div>
+    </div>
+
+    <p class="open-text" id="openText">
+        Klicke auf den Brief, um ihn zu öffnen.
+    </p>
+
+    <button id="openButton" onclick="openLetter()">
+        Brief öffnen ❤️
+    </button>
+
+    <div class="letter" id="letter">
+
+        <h2>Mein Schatz ❤️</h2>
+
+        <p>
+            Jetzt ist tatsächlich schon das 24. Türchen erreicht.
+            24 Tage voller kleiner Überraschungen liegen hinter uns
+            und ich hoffe, dass ich dir damit jeden Tag ein kleines
+            Lächeln schenken konnte.
+        </p>
+
+        <p>
+            Ich wollte dir mit diesem Adventskalender zeigen, wie
+            viel du mir bedeutest. Vielleicht waren manche Türchen
+            lustig, manche etwas verrückt und andere einfach nur süß.
+            Aber hinter jedem einzelnen steckte derselbe Gedanke:
+            <b>Ich wollte dir eine Freude machen.</b>
+        </p>
+
+        <p>
+            Ich bin unglaublich froh, dich an meiner Seite zu haben.
+            Du bist ein Mensch, der meinen Alltag schöner macht,
+            bei dem ich gerne bin und an den ich unglaublich oft
+            denken muss.
+        </p>
+
+        <p>
+            Natürlich ist nicht immer alles perfekt und das muss es
+            auch gar nicht sein. Mir ist viel wichtiger, dass wir
+            zusammen lachen, füreinander da sind und gemeinsam neue
+            Dinge erleben können.
+        </p>
+
+        <p>
+            Ich wünsche mir, dass wir noch ganz viele schöne Momente
+            miteinander erleben, zusammen lachen und uns gegenseitig
+            glücklich machen.
+        </p>
+
+        <p>
+            Danke, dass du so bist, wie du bist. Danke für deine
+            Liebe und dafür, dass es dich gibt.
+        </p>
+
+        <p>
+            Und falls du es manchmal vergessen solltest:
+            <b>Du bist etwas ganz Besonderes für mich.</b>
+        </p>
+
+        <p>
+            Ich hoffe, du hattest Freude an deinem Adventskalender.
+            Ich habe mir für jedes Türchen etwas überlegt, weil du
+            mir einfach unglaublich wichtig bist.
+        </p>
+
+        <p class="end">
+            Frohe Weihnachten, mein Schatz. ❤️
+        </p>
+
+        <p class="signature">
+            Ich liebe dich. ❤️
+        </p>
+
+    </div>
+
+</div>
+
+<script>
+let opened = false;
+
+function openLetter() {
+    if (opened) return;
+
+    opened = true;
+
+    document.getElementById("envelope").classList.add("open");
+
+    document.getElementById("openText").textContent =
+        "Ein kleiner Brief nur für dich ... ❤️";
+
+    document.getElementById("openButton").classList.add("hidden");
+
+    setTimeout(() => {
+        document.getElementById("envelopeArea").classList.add("hidden");
+        document.getElementById("openText").classList.add("hidden");
+
+        const letter = document.getElementById("letter");
+        letter.style.display = "block";
+
+        setTimeout(() => {
+            letter.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }, 100);
+    }, 1400);
+}
+
+// Schneefall
+for (let i = 0; i < 35; i++) {
+    const snow = document.createElement("div");
+    snow.className = "snow";
+    snow.textContent = "❄";
+
+    snow.style.left = Math.random() * 100 + "vw";
+    snow.style.fontSize = (10 + Math.random() * 13) + "px";
+    snow.style.animationDuration = (5 + Math.random() * 9) + "s";
+    snow.style.animationDelay = (-Math.random() * 10) + "s";
+
+    document.body.appendChild(snow);
+}
+</script>
+
+</body>
+</html>
