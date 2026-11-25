@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 21 ❤️</title>
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #170b18, #351426);
+  font-family: Arial, sans-serif;
+  color: white;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 430px;
+  padding: 35px 25px;
+  border-radius: 25px;
+  text-align: center;
+  background: #281522;
+  border: 1px solid #75405d;
+  box-shadow: 0 15px 50px #0007;
+}
+
+h1 { color: #ff9fc8; }
+
+.machine {
+  margin: 30px auto;
+  padding: 25px;
+  width: 210px;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #a52d60, #54152f);
+  border: 4px solid #e77eaa;
+  box-shadow: 0 10px 25px #0006;
+}
+
+.display {
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #240d1c;
+  border-radius: 15px;
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+button {
+  border: none;
+  border-radius: 30px;
+  padding: 15px 25px;
+  background: #ff91bd;
+  color: #351426;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #ffc0dc;
+}
+
+button:active { transform: scale(.96); }
+
+#message {
+  margin-top: 25px;
+  padding: 20px;
+  min-height: 110px;
+  line-height: 1.6;
+  background: #3a2030;
+  border-radius: 15px;
+  color: #ffd4e5;
+  display: none;
+  animation: appear .5s ease;
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.small {
+  color: #d5a9bd;
+  font-size: 13px;
+  margin-top: 25px;
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Eine kleine Überraschung ❤️</h1>
+  <p>Manchmal braucht es nur einen Knopfdruck, um jemandem ein Lächeln zu schenken.</p>
+
+  <div class="machine">
+    <div class="display" id="display">❤️</div>
+    <button onclick="surprise()">Drück mich!</button>
+  </div>
+
+  <div id="message"></div>
+
+  <p class="small">Tag 21 · Eine kleine Nachricht nur für dich</p>
+</div>
+
+<script>
+const messages = [
+  "Du bist einer der schönsten Zufälle in meinem Leben. ❤️",
+  "Ich bin unglaublich froh, dass es dich gibt.",
+  "Du schaffst es, selbst gewöhnliche Tage besonders zu machen.",
+  "Wenn ich an dich denke, muss ich automatisch lächeln.",
+  "Du bist für mich etwas ganz Besonderes.",
+  "Ich würde mich immer wieder für dich entscheiden.",
+  "Mit dir sind selbst kleine Momente wunderschön.",
+  "Vergiss niemals, wie wertvoll du bist.",
+  "Ich bin dankbar für jede einzelne Erinnerung mit dir.",
+  "Du machst mein Leben ein kleines Stück schöner. ❤️",
+  "Egal wie stressig ein Tag ist, du bist immer ein schöner Gedanke.",
+  "Ich liebe es, mit dir neue Erinnerungen zu sammeln."
+];
+
+let last = -1;
+
+function surprise() {
+  let number;
+
+  do {
+    number = Math.floor(Math.random() * messages.length);
+  } while (number === last);
+
+  last = number;
+
+  const display = document.getElementById("display");
+  const message = document.getElementById("message");
+
+  display.textContent = "💗";
+  message.style.display = "block";
+  message.style.animation = "none";
+  void message.offsetWidth;
+  message.style.animation = "appear .5s ease";
+  message.textContent = messages[number];
+}
+</script>
+
+</body>
+</html>
