@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 20 – Unser Kinosaal</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(145deg, #160d19, #3a172a);
+    transition: background 0.5s;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 27px 20px;
+    text-align: center;
+    border-radius: 24px;
+    background: #ffffff0c;
+    border: 1px solid #ffffff20;
+    box-shadow: 0 15px 45px #0005;
+}
+
+h1 {
+    color: #ffbad2;
+    font-size: 27px;
+}
+
+.subtitle {
+    color: #e9ced8;
+    line-height: 1.6;
+}
+
+.screen {
+    margin: 22px 0;
+    padding: 28px 12px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #301c38, #6c3454);
+    border: 3px solid #d7a5ba;
+    box-shadow: 0 0 25px #ffbad244;
+    transition: 0.5s;
+}
+
+.screen-icon {
+    font-size: 48px;
+}
+
+.screen h2 {
+    color: #ffd5e4;
+    font-size: 19px;
+}
+
+.screen p {
+    font-size: 13px;
+    color: #e8cbd8;
+}
+
+.section {
+    margin-top: 22px;
+    padding: 17px;
+    border-radius: 15px;
+    background: #ffffff0b;
+    text-align: left;
+}
+
+.section h3 {
+    margin-top: 0;
+    color: #ffbad2;
+    font-size: 17px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.option {
+    padding: 13px 8px;
+    border-radius: 11px;
+    border: 1px solid #ffffff25;
+    background: #ffffff0b;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option.selected {
+    background: #8b4669;
+    border-color: #ffbad2;
+    box-shadow: 0 0 12px #ffbad233;
+}
+
+.option:hover {
+    transform: translateY(-2px);
+}
+
+.main-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 23px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ffc3d8, #df91b0);
+    color: #421d32;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.ticket {
+    display: none;
+    margin-top: 25px;
+    padding: 22px 15px;
+    border: 2px dashed #ffc3d8;
+    border-radius: 16px;
+    background: #ffffff10;
+    animation: appear 0.8s ease;
+}
+
+.ticket h2 {
+    color: #ffd18b;
+}
+
+.ticket p {
+    line-height: 1.7;
+}
+
+.ticket-details {
+    text-align: left;
+    padding: 15px;
+    margin: 15px 0;
+    background: #ffffff0b;
+    border-radius: 12px;
+    line-height: 1.9;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div style="font-size:40px;">🍿</div>
+
+    <h1>Unser kleiner Kinosaal</h1>
+
+    <p class="subtitle">
+        Willkommen im privaten Kino!<br>
+        Stelle deinen perfekten Filmabend zusammen.
+    </p>
+
+    <div class="screen" id="screen">
+        <div class="screen-icon" id="screenIcon">🎬</div>
+        <h2 id="screenTitle">Dein Filmabend</h2>
+        <p>Ein gemütlicher Abend wartet auf dich.</p>
+    </div>
+
+    <div class="section">
+        <h3>🍿 1. Deine Snacks</h3>
+        <div class="options" data-group="snacks">
+            <button class="option selected" data-value="Popcorn 🍿">🍿 Popcorn</button>
+            <button class="option" data-value="Schokolade 🍫">🍫 Schokolade</button>
+            <button class="option" data-value="Gummibärchen 🍬">🍬 Gummibärchen</button>
+            <button class="option" data-value="Nachos 🧀">🧀 Nachos</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>🎥 2. Dein Filmabend-Stil</h3>
+        <div class="options" data-group="style">
+            <button class="option selected" data-value="Gemütlich 🧸">🧸 Gemütlich</button>
+            <button class="option" data-value="Romantisch ❤️">❤️ Romantisch</button>
+            <button class="option" data-value="Lustig 😂">😂 Lustig</button>
+            <button class="option" data-value="Weihnachtlich 🎄">🎄 Weihnachtlich</button>
+        </div>
+    </div>
+
+    <div class="section">
+        <h3>🕯️ 3. Die Beleuchtung</h3>
+        <div class="options" data-group="light">
+            <button class="option selected" data-value="Warm und gemütlich">🟠 Warm</button>
+            <button class="option" data-value="Romantisches Rosa">💗 Rosa</button>
+            <button class="option" data-value="Magisches Violett">💜 Violett</button>
+            <button class="option" data-value="Kühles Blau">💙 Blau</button>
+        </div>
+    </div>
+
+    <button class="main-button" onclick="createTicket()">
+        Mein Kinoticket erstellen 🎟️
+    </button>
+
+    <div class="ticket" id="ticket">
+        <div style="font-size:48px;">🎟️</div>
+        <h2>Dein persönliches Kinoticket</h2>
+
+        <p>
+            EINLADUNG ZUM GEMEINSAMEN FILMABEND
+        </p>
+
+        <div class="ticket-details">
+            <div><b>Snacks:</b> <span id="ticketSnacks"></span></div>
+            <div><b>Stimmung:</b> <span id="ticketStyle"></span></div>
+            <div><b>Licht:</b> <span id="ticketLight"></span></div>
+            <div><b>Begleitung:</b> Ich ❤️</div>
+        </div>
+
+        <p>
+            Der Termin wird noch gemeinsam ausgesucht.
+            <br><br>
+            Egal welchen Film wir schauen:
+            Hauptsache, wir verbringen die Zeit zusammen.
+            <br><br>
+            Ich freue mich auf unseren Filmabend! ❤️
+        </p>
+    </div>
+
+</div>
+
+<script>
+const selections = {
+    snacks: "Popcorn 🍿",
+    style: "Gemütlich 🧸",
+    light: "Warm und gemütlich"
+};
+
+document.querySelectorAll(".options").forEach(group => {
+
+    group.querySelectorAll(".option").forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            group.querySelectorAll(".option").forEach(option => {
+                option.classList.remove("selected");
+            });
+
+            button.classList.add("selected");
+
+            selections[group.dataset.group] = button.dataset.value;
+
+            updatePreview();
+        });
+    });
+});
+
+function updatePreview() {
+
+    const screen = document.getElementById("screen");
+
+    document.getElementById("screenTitle").textContent =
+        selections.style;
+
+    if (selections.style.includes("Romantisch")) {
+        document.getElementById("screenIcon").textContent = "❤️";
+    } else if (selections.style.includes("Lustig")) {
+        document.getElementById("screenIcon").textContent = "😂";
+    } else if (selections.style.includes("Weihnachtlich")) {
+        document.getElementById("screenIcon").textContent = "🎄";
+    } else {
+        document.getElementById("screenIcon").textContent = "🧸";
+    }
+
+    const colors = {
+        "Warm und gemütlich": "linear-gradient(135deg, #63402c, #b27645)",
+        "Romantisches Rosa": "linear-gradient(135deg, #762d55, #c05d91)",
+        "Magisches Violett": "linear-gradient(135deg, #39265f, #8152a5)",
+        "Kühles Blau": "linear-gradient(135deg, #173a63, #3976a8)"
+    };
+
+    screen.style.background = colors[selections.light];
+}
+
+function createTicket() {
+
+    document.getElementById("ticketSnacks").textContent =
+        selections.snacks;
+
+    document.getElementById("ticketStyle").textContent =
+        selections.style;
+
+    document.getElementById("ticketLight").textContent =
+        selections.light;
+
+    document.getElementById("ticket").style.display = "block";
+
+    document.getElementById("ticket").scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+updatePreview();
+</script>
+
+</body>
+</html>
