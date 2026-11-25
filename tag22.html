@@ -4,82 +4,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tag 22 – Schneemann bauen ☃️</title>
+<title>Tag 22 – Schneemann ☃️</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   min-height: 100vh;
+  padding: 22px 14px;
   font-family: Arial, sans-serif;
   color: white;
-  background: linear-gradient(180deg, #101b35, #263c60, #6b829e);
   text-align: center;
-  padding: 25px 15px;
-  overflow-x: hidden;
+  background: linear-gradient(#101b35, #263e60, #718da9);
 }
 
 .card {
   max-width: 520px;
-  margin: 20px auto;
-  padding: 25px 18px;
+  margin: 15px auto;
+  padding: 25px 17px;
   border-radius: 25px;
-  background: rgba(17, 28, 51, 0.88);
-  border: 1px solid #718ba9;
-  box-shadow: 0 15px 45px #0005;
+  background: rgba(17, 28, 51, .9);
+  border: 1px solid #7894b5;
+  box-shadow: 0 15px 45px #0006;
 }
 
-h1 {
-  color: #d9edff;
-  margin-bottom: 10px;
-}
+h1 { color: #e1f1ff; }
 
-.subtitle {
-  color: #c4d8ef;
-  line-height: 1.5;
-}
+p { color: #c8dced; line-height: 1.6; }
 
 .scene {
   position: relative;
-  height: 390px;
+  height: 440px;
+  max-width: 390px;
   margin: 25px auto;
-  max-width: 370px;
-  border-radius: 22px;
   overflow: hidden;
-  background: linear-gradient(#182d50 0%, #52769b 75%, #dce9f5 75%);
-}
-
-.moon {
-  position: absolute;
-  top: 25px;
-  right: 35px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: #fff5cf;
-  box-shadow: 0 0 30px #fff5cf;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 80% 15%, #fff5d6 0 23px, transparent 24px),
+    linear-gradient(#142747, #456b91 76%, #dceaf7 76%);
 }
 
 .ground {
   position: absolute;
-  bottom: -35px;
+  bottom: -45px;
   left: -10%;
   width: 120%;
-  height: 100px;
+  height: 110px;
   border-radius: 50%;
-  background: #edf6ff;
+  background: #f3f8ff;
 }
 
 .snowman {
   position: absolute;
-  bottom: 23px;
+  width: 230px;
+  height: 365px;
   left: 50%;
+  bottom: 28px;
   transform: translateX(-50%);
-  width: 190px;
-  height: 300px;
 }
 
 .ball {
@@ -87,144 +69,196 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 25%, #fff, #e7f2fa 65%, #b8cddd);
-  box-shadow: inset -8px -8px 15px #a8bdce66;
+  background:
+    radial-gradient(ellipse at 30% 20%, #fff 0%, #f8fcff 30%, #e1edf6 75%, #b9cbdc 100%);
+  box-shadow:
+    inset -10px -12px 18px #8fa9bd55,
+    0 5px 12px #263c5066;
 }
 
 .bottom {
-  width: 170px;
-  height: 160px;
+  width: 195px;
+  height: 180px;
   bottom: 0;
 }
 
 .middle {
-  width: 125px;
-  height: 120px;
-  bottom: 125px;
+  width: 145px;
+  height: 140px;
+  bottom: 145px;
 }
 
 .head {
-  width: 95px;
-  height: 95px;
-  bottom: 225px;
+  width: 112px;
+  height: 112px;
+  bottom: 265px;
+  z-index: 3;
 }
+
+/* Gesicht */
 
 .eye {
   position: absolute;
-  top: 27px;
-  width: 9px;
-  height: 9px;
+  top: 32px;
+  width: 11px;
+  height: 13px;
+  background: #263243;
   border-radius: 50%;
-  background: #253044;
+  box-shadow: inset 2px 2px 2px #667;
 }
 
-.eye.left { left: 29px; }
-.eye.right { right: 29px; }
+.eye.left { left: 32px; }
+.eye.right { right: 32px; }
 
 .nose {
   position: absolute;
-  top: 44px;
-  left: 48px;
+  top: 47px;
+  left: 53px;
   width: 0;
   height: 0;
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
-  border-left: 28px solid #f18a36;
-  transform: rotate(-5deg);
+  border-left: 35px solid #ef8c32;
+  filter: drop-shadow(1px 2px 2px #9c5724);
 }
 
 .mouth {
   position: absolute;
-  top: 65px;
-  left: 35px;
-  font-size: 16px;
-  color: #29374a;
-  letter-spacing: 2px;
+  top: 72px;
+  left: 39px;
+  width: 35px;
+  height: 15px;
+  border-bottom: 3px dotted #303b4a;
+  border-radius: 50%;
 }
 
-.buttons {
-  position: absolute;
-  bottom: 65px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 15px;
-  line-height: 23px;
-  color: #26374c;
-}
+/* Schal direkt am Hals */
 
 .scarf {
   position: absolute;
-  bottom: 112px;
-  left: 32px;
-  width: 125px;
-  height: 15px;
-  border-radius: 10px;
+  z-index: 5;
+  left: 50%;
+  bottom: 246px;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 132px;
+  height: 23px;
+  border-radius: 9px;
   background: #d94e75;
-  transform: rotate(-3deg);
+  box-shadow: 0 3px 5px #0003;
 }
 
 .scarf::after {
   content: "";
   position: absolute;
-  right: 18px;
-  top: 8px;
-  width: 18px;
-  height: 48px;
-  border-radius: 5px;
+  top: 12px;
+  right: 17px;
+  width: 25px;
+  height: 67px;
   background: inherit;
-  transform: rotate(-8deg);
+  border-radius: 4px 4px 10px 10px;
+  transform: rotate(-7deg);
+  box-shadow: 2px 3px 5px #0003;
 }
+
+.scarf::before {
+  content: "";
+  position: absolute;
+  inset: 5px 0;
+  border-top: 2px dashed #ffffff66;
+  border-bottom: 2px dashed #ffffff66;
+}
+
+/* Hut */
 
 .hat {
   position: absolute;
-  bottom: 300px;
+  z-index: 4;
   left: 50%;
+  bottom: 367px;
   transform: translateX(-50%);
-  width: 65px;
-  height: 55px;
+  width: 76px;
+  height: 59px;
   background: #263044;
-  border-radius: 8px 8px 2px 2px;
+  border-radius: 9px 9px 2px 2px;
+  box-shadow: inset 5px 0 8px #ffffff22;
 }
 
 .hat::after {
   content: "";
   position: absolute;
-  bottom: -7px;
   left: -12px;
-  width: 89px;
-  height: 10px;
-  border-radius: 5px;
+  bottom: -7px;
+  width: 100px;
+  height: 11px;
+  border-radius: 8px;
   background: inherit;
 }
 
+/* Knöpfe */
+
+.buttons {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 72px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.buttonDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #27364b;
+  box-shadow: inset 2px 2px 3px #ffffff55;
+}
+
+/* Arme */
+
 .arms {
   position: absolute;
-  bottom: 145px;
-  left: 0;
-  width: 190px;
-  height: 5px;
+  z-index: 2;
+  left: 50%;
+  bottom: 170px;
+  width: 230px;
+  height: 100px;
+  transform: translateX(-50%);
 }
 
-.arms::before,
-.arms::after {
-  content: "";
+.arm {
   position: absolute;
-  width: 75px;
-  height: 5px;
+  top: 35px;
+  width: 92px;
+  height: 6px;
+  border-radius: 10px;
   background: #805333;
-  border-radius: 5px;
-  top: 0;
 }
 
-.arms::before {
-  left: -20px;
+.arm.left {
+  left: -10px;
   transform: rotate(25deg);
 }
 
-.arms::after {
-  right: -20px;
+.arm.right {
+  right: -10px;
   transform: rotate(-25deg);
 }
+
+.arm::after {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 5px;
+  background: inherit;
+  border-radius: 10px;
+  top: -12px;
+  left: 5px;
+  transform: rotate(-35deg);
+}
+
+/* Steuerung */
 
 .controls {
   display: grid;
@@ -234,7 +268,7 @@ h1 {
 }
 
 .control {
-  padding: 13px 8px;
+  padding: 14px 7px;
   border: 1px solid #7896b8;
   border-radius: 13px;
   background: #304967;
@@ -243,17 +277,15 @@ h1 {
   cursor: pointer;
 }
 
-.control:hover {
-  background: #466486;
-}
+.control:hover { background: #466486; }
 
 .reset {
   margin-top: 15px;
+  padding: 13px 25px;
+  border: none;
+  border-radius: 25px;
   background: #d9edff;
   color: #1b2c46;
-  border: none;
-  padding: 13px 25px;
-  border-radius: 25px;
   font-weight: bold;
   cursor: pointer;
 }
@@ -273,143 +305,89 @@ h1 {
   top: -20px;
   color: white;
   pointer-events: none;
-  animation: fall linear infinite;
-  z-index: 5;
+  animation: fall linear forwards;
+  z-index: 10;
 }
 
 @keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
-}
-
-@media(max-width: 380px) {
-  .scene { height: 360px; }
+  to { transform: translateY(110vh) rotate(360deg); }
 }
 </style>
 </head>
 
 <body>
-
 <div class="card">
 
-  <h1>☃️ Baue deinen Schneemann!</h1>
+<h1>☃️ Baue deinen Schneemann!</h1>
+<p>Gestalte deinen eigenen Schneemann und mach ihn zu etwas ganz Besonderem. ❄️</p>
 
-  <p class="subtitle">
-    Draußen ist es kalt und es liegt Schnee.
-    Zeit, deinen eigenen Schneemann zu bauen! ❄️
-  </p>
+<div class="scene">
+  <div class="ground"></div>
 
-  <div class="scene">
+  <div class="snowman">
 
-    <div class="moon"></div>
-    <div class="ground"></div>
-
-    <div class="snowman">
-
-      <div class="ball bottom"></div>
-      <div class="ball middle"></div>
-      <div class="ball head">
-
-        <div class="eye left"></div>
-        <div class="eye right"></div>
-        <div class="nose"></div>
-        <div class="mouth">● ● ●</div>
-
-      </div>
-
-      <div class="arms" id="arms"></div>
-      <div class="buttons" id="buttons">●<br>●<br>●</div>
-
-      <div class="scarf" id="scarf"></div>
-      <div class="hat" id="hat"></div>
-
+    <div class="arms">
+      <div class="arm left"></div>
+      <div class="arm right"></div>
     </div>
-  </div>
 
-  <h2>Gestalte deinen Schneemann</h2>
-  <p class="subtitle">Tippe auf die Knöpfe und probiere verschiedene Styles aus!</p>
+    <div class="ball bottom"></div>
+    <div class="ball middle"></div>
 
-  <div class="controls">
+    <div class="ball head">
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+      <div class="nose"></div>
+      <div class="mouth"></div>
+    </div>
 
-    <button class="control" onclick="changeHat()">
-      🎩 Hut wechseln
-    </button>
+    <div class="buttons" id="buttons">
+      <div class="buttonDot"></div>
+      <div class="buttonDot"></div>
+      <div class="buttonDot"></div>
+    </div>
 
-    <button class="control" onclick="changeScarf()">
-      🧣 Schal wechseln
-    </button>
-
-    <button class="control" onclick="changeFace()">
-      😊 Gesicht wechseln
-    </button>
-
-    <button class="control" onclick="changeArms()">
-      🌿 Arme wechseln
-    </button>
-
-    <button class="control" onclick="changeButtons()">
-      ⚫ Knöpfe wechseln
-    </button>
-
-    <button class="control" onclick="finish()">
-      ✨ Fertig!
-    </button>
+    <div class="scarf" id="scarf"></div>
+    <div class="hat" id="hat"></div>
 
   </div>
+</div>
 
-  <button class="reset" onclick="resetSnowman()">
-    ↻ Neu gestalten
-  </button>
+<h2>Gestalte deinen Schneemann</h2>
+<p>Wähle verschiedene Accessoires aus!</p>
 
-  <div id="final">
-    <h2>Dein Schneemann ist fertig! ☃️❤️</h2>
-    <p>
-      Egal wie kalt es draußen ist,
-      manche Menschen machen die Welt einfach wärmer.
-      Für mich bist du so ein Mensch.
-      Ich bin unglaublich froh, dich zu haben.
-      ❤️
-    </p>
-  </div>
+<div class="controls">
+  <button class="control" onclick="changeHat()">🎩 Hut wechseln</button>
+  <button class="control" onclick="changeScarf()">🧣 Schal wechseln</button>
+  <button class="control" onclick="changeFace()">😊 Gesicht wechseln</button>
+  <button class="control" onclick="changeArms()">🌿 Arme wechseln</button>
+  <button class="control" onclick="changeButtons()">⚫ Knöpfe wechseln</button>
+  <button class="control" onclick="finish()">✨ Fertig!</button>
+</div>
+
+<button class="reset" onclick="resetSnowman()">↻ Neu gestalten</button>
+
+<div id="final">
+  <h2>Dein Schneemann ist fertig! ☃️❤️</h2>
+  <p>
+    Egal wie kalt es draußen ist,
+    manche Menschen machen die Welt einfach wärmer.
+    Für mich bist du so ein Mensch.
+    Ich bin unglaublich froh, dich zu haben. ❤️
+  </p>
+</div>
 
 </div>
 
 <script>
+const hats = ["#263044", "#a52d60", "#356b91", "#7651a3", "#d48b35"];
+const scarfs = ["#d94e75", "#4389b5", "#8d5db0", "#d38b36", "#4b9a72"];
+
 let hatIndex = 0;
 let scarfIndex = 0;
 let faceIndex = 0;
 let armIndex = 0;
 let buttonIndex = 0;
-
-const hats = [
-  "#263044",
-  "#a52d60",
-  "#356b91",
-  "#7651a3",
-  "#d48b35"
-];
-
-const scarfs = [
-  "#d94e75",
-  "#4389b5",
-  "#8d5db0",
-  "#d38b36",
-  "#4b9a72"
-];
-
-const faces = [
-  ["● ● ●", "#29374a"],
-  ["⌣", "#29374a"],
-  ["♥", "#d94e75"],
-  ["ᴗ", "#29374a"]
-];
-
-const buttons = [
-  "●<br>●<br>●",
-  "♥<br>♥<br>♥",
-  "★<br>★<br>★"
-];
 
 function changeHat() {
   hatIndex = (hatIndex + 1) % hats.length;
@@ -422,24 +400,38 @@ function changeScarf() {
 }
 
 function changeFace() {
-  faceIndex = (faceIndex + 1) % faces.length;
+  faceIndex = (faceIndex + 1) % 3;
   const mouth = document.querySelector(".mouth");
-  mouth.textContent = faces[faceIndex][0];
-  mouth.style.color = faces[faceIndex][1];
+  const nose = document.querySelector(".nose");
+
+  const faces = [
+    { mouth: "50%", nose: "#ef8c32" },
+    { mouth: "70%", nose: "#ef8c32" },
+    { mouth: "35%", nose: "#e7a04b" }
+  ];
+
+  mouth.style.top = faces[faceIndex].mouth;
+  nose.style.borderLeftColor = faces[faceIndex].nose;
 }
 
 function changeArms() {
   armIndex = (armIndex + 1) % 3;
-  const arms = document.getElementById("arms");
-  const colors = ["#805333", "#5d4938", "#b47a42"];
-  arms.style.setProperty("--arm-color", colors[armIndex]);
-  arms.style.opacity = armIndex === 2 ? "0.5" : "1";
-  arms.style.transform = armIndex === 1 ? "scale(0.8)" : "scale(1)";
+  const arms = document.querySelectorAll(".arm");
+  const colors = ["#805333", "#a16b3d", "#6b4935"];
+
+  arms.forEach(arm => {
+    arm.style.background = colors[armIndex];
+    arm.style.height = armIndex === 2 ? "9px" : "6px";
+  });
 }
 
 function changeButtons() {
-  buttonIndex = (buttonIndex + 1) % buttons.length;
-  document.getElementById("buttons").innerHTML = buttons[buttonIndex];
+  buttonIndex = (buttonIndex + 1) % 3;
+  const colors = ["#27364b", "#b13d68", "#d28b35"];
+
+  document.querySelectorAll(".buttonDot").forEach(dot => {
+    dot.style.background = colors[buttonIndex];
+  });
 }
 
 function finish() {
@@ -459,10 +451,19 @@ function resetSnowman() {
 
   document.getElementById("hat").style.background = hats[0];
   document.getElementById("scarf").style.background = scarfs[0];
-  document.querySelector(".mouth").textContent = faces[0][0];
-  document.getElementById("buttons").innerHTML = buttons[0];
-  document.getElementById("arms").style.opacity = "1";
-  document.getElementById("arms").style.transform = "scale(1)";
+
+  document.querySelector(".mouth").style.top = "72px";
+  document.querySelector(".nose").style.borderLeftColor = "#ef8c32";
+
+  document.querySelectorAll(".arm").forEach(arm => {
+    arm.style.background = "#805333";
+    arm.style.height = "6px";
+  });
+
+  document.querySelectorAll(".buttonDot").forEach(dot => {
+    dot.style.background = "#27364b";
+  });
+
   document.getElementById("final").style.display = "none";
 }
 
@@ -474,7 +475,6 @@ function makeSnow() {
   snow.style.animationDuration = (4 + Math.random() * 6) + "s";
   snow.style.fontSize = (10 + Math.random() * 15) + "px";
   document.body.appendChild(snow);
-
   setTimeout(() => snow.remove(), 10000);
 }
 
