@@ -1,0 +1,485 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 22 – Schneemann bauen ☃️</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: linear-gradient(180deg, #101b35, #263c60, #6b829e);
+  text-align: center;
+  padding: 25px 15px;
+  overflow-x: hidden;
+}
+
+.card {
+  max-width: 520px;
+  margin: 20px auto;
+  padding: 25px 18px;
+  border-radius: 25px;
+  background: rgba(17, 28, 51, 0.88);
+  border: 1px solid #718ba9;
+  box-shadow: 0 15px 45px #0005;
+}
+
+h1 {
+  color: #d9edff;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #c4d8ef;
+  line-height: 1.5;
+}
+
+.scene {
+  position: relative;
+  height: 390px;
+  margin: 25px auto;
+  max-width: 370px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(#182d50 0%, #52769b 75%, #dce9f5 75%);
+}
+
+.moon {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fff5cf;
+  box-shadow: 0 0 30px #fff5cf;
+}
+
+.ground {
+  position: absolute;
+  bottom: -35px;
+  left: -10%;
+  width: 120%;
+  height: 100px;
+  border-radius: 50%;
+  background: #edf6ff;
+}
+
+.snowman {
+  position: absolute;
+  bottom: 23px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 190px;
+  height: 300px;
+}
+
+.ball {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, #fff, #e7f2fa 65%, #b8cddd);
+  box-shadow: inset -8px -8px 15px #a8bdce66;
+}
+
+.bottom {
+  width: 170px;
+  height: 160px;
+  bottom: 0;
+}
+
+.middle {
+  width: 125px;
+  height: 120px;
+  bottom: 125px;
+}
+
+.head {
+  width: 95px;
+  height: 95px;
+  bottom: 225px;
+}
+
+.eye {
+  position: absolute;
+  top: 27px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #253044;
+}
+
+.eye.left { left: 29px; }
+.eye.right { right: 29px; }
+
+.nose {
+  position: absolute;
+  top: 44px;
+  left: 48px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 28px solid #f18a36;
+  transform: rotate(-5deg);
+}
+
+.mouth {
+  position: absolute;
+  top: 65px;
+  left: 35px;
+  font-size: 16px;
+  color: #29374a;
+  letter-spacing: 2px;
+}
+
+.buttons {
+  position: absolute;
+  bottom: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 15px;
+  line-height: 23px;
+  color: #26374c;
+}
+
+.scarf {
+  position: absolute;
+  bottom: 112px;
+  left: 32px;
+  width: 125px;
+  height: 15px;
+  border-radius: 10px;
+  background: #d94e75;
+  transform: rotate(-3deg);
+}
+
+.scarf::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  top: 8px;
+  width: 18px;
+  height: 48px;
+  border-radius: 5px;
+  background: inherit;
+  transform: rotate(-8deg);
+}
+
+.hat {
+  position: absolute;
+  bottom: 300px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65px;
+  height: 55px;
+  background: #263044;
+  border-radius: 8px 8px 2px 2px;
+}
+
+.hat::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: -12px;
+  width: 89px;
+  height: 10px;
+  border-radius: 5px;
+  background: inherit;
+}
+
+.arms {
+  position: absolute;
+  bottom: 145px;
+  left: 0;
+  width: 190px;
+  height: 5px;
+}
+
+.arms::before,
+.arms::after {
+  content: "";
+  position: absolute;
+  width: 75px;
+  height: 5px;
+  background: #805333;
+  border-radius: 5px;
+  top: 0;
+}
+
+.arms::before {
+  left: -20px;
+  transform: rotate(25deg);
+}
+
+.arms::after {
+  right: -20px;
+  transform: rotate(-25deg);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.control {
+  padding: 13px 8px;
+  border: 1px solid #7896b8;
+  border-radius: 13px;
+  background: #304967;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.control:hover {
+  background: #466486;
+}
+
+.reset {
+  margin-top: 15px;
+  background: #d9edff;
+  color: #1b2c46;
+  border: none;
+  padding: 13px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#final {
+  display: none;
+  margin-top: 22px;
+  padding: 20px;
+  background: #304967;
+  border-radius: 16px;
+  line-height: 1.7;
+  color: #e3f2ff;
+}
+
+.snowflake {
+  position: fixed;
+  top: -20px;
+  color: white;
+  pointer-events: none;
+  animation: fall linear infinite;
+  z-index: 5;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+@media(max-width: 380px) {
+  .scene { height: 360px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <h1>☃️ Baue deinen Schneemann!</h1>
+
+  <p class="subtitle">
+    Draußen ist es kalt und es liegt Schnee.
+    Zeit, deinen eigenen Schneemann zu bauen! ❄️
+  </p>
+
+  <div class="scene">
+
+    <div class="moon"></div>
+    <div class="ground"></div>
+
+    <div class="snowman">
+
+      <div class="ball bottom"></div>
+      <div class="ball middle"></div>
+      <div class="ball head">
+
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="nose"></div>
+        <div class="mouth">● ● ●</div>
+
+      </div>
+
+      <div class="arms" id="arms"></div>
+      <div class="buttons" id="buttons">●<br>●<br>●</div>
+
+      <div class="scarf" id="scarf"></div>
+      <div class="hat" id="hat"></div>
+
+    </div>
+  </div>
+
+  <h2>Gestalte deinen Schneemann</h2>
+  <p class="subtitle">Tippe auf die Knöpfe und probiere verschiedene Styles aus!</p>
+
+  <div class="controls">
+
+    <button class="control" onclick="changeHat()">
+      🎩 Hut wechseln
+    </button>
+
+    <button class="control" onclick="changeScarf()">
+      🧣 Schal wechseln
+    </button>
+
+    <button class="control" onclick="changeFace()">
+      😊 Gesicht wechseln
+    </button>
+
+    <button class="control" onclick="changeArms()">
+      🌿 Arme wechseln
+    </button>
+
+    <button class="control" onclick="changeButtons()">
+      ⚫ Knöpfe wechseln
+    </button>
+
+    <button class="control" onclick="finish()">
+      ✨ Fertig!
+    </button>
+
+  </div>
+
+  <button class="reset" onclick="resetSnowman()">
+    ↻ Neu gestalten
+  </button>
+
+  <div id="final">
+    <h2>Dein Schneemann ist fertig! ☃️❤️</h2>
+    <p>
+      Egal wie kalt es draußen ist,
+      manche Menschen machen die Welt einfach wärmer.
+      Für mich bist du so ein Mensch.
+      Ich bin unglaublich froh, dich zu haben.
+      ❤️
+    </p>
+  </div>
+
+</div>
+
+<script>
+let hatIndex = 0;
+let scarfIndex = 0;
+let faceIndex = 0;
+let armIndex = 0;
+let buttonIndex = 0;
+
+const hats = [
+  "#263044",
+  "#a52d60",
+  "#356b91",
+  "#7651a3",
+  "#d48b35"
+];
+
+const scarfs = [
+  "#d94e75",
+  "#4389b5",
+  "#8d5db0",
+  "#d38b36",
+  "#4b9a72"
+];
+
+const faces = [
+  ["● ● ●", "#29374a"],
+  ["⌣", "#29374a"],
+  ["♥", "#d94e75"],
+  ["ᴗ", "#29374a"]
+];
+
+const buttons = [
+  "●<br>●<br>●",
+  "♥<br>♥<br>♥",
+  "★<br>★<br>★"
+];
+
+function changeHat() {
+  hatIndex = (hatIndex + 1) % hats.length;
+  document.getElementById("hat").style.background = hats[hatIndex];
+}
+
+function changeScarf() {
+  scarfIndex = (scarfIndex + 1) % scarfs.length;
+  document.getElementById("scarf").style.background = scarfs[scarfIndex];
+}
+
+function changeFace() {
+  faceIndex = (faceIndex + 1) % faces.length;
+  const mouth = document.querySelector(".mouth");
+  mouth.textContent = faces[faceIndex][0];
+  mouth.style.color = faces[faceIndex][1];
+}
+
+function changeArms() {
+  armIndex = (armIndex + 1) % 3;
+  const arms = document.getElementById("arms");
+  const colors = ["#805333", "#5d4938", "#b47a42"];
+  arms.style.setProperty("--arm-color", colors[armIndex]);
+  arms.style.opacity = armIndex === 2 ? "0.5" : "1";
+  arms.style.transform = armIndex === 1 ? "scale(0.8)" : "scale(1)";
+}
+
+function changeButtons() {
+  buttonIndex = (buttonIndex + 1) % buttons.length;
+  document.getElementById("buttons").innerHTML = buttons[buttonIndex];
+}
+
+function finish() {
+  document.getElementById("final").style.display = "block";
+  document.getElementById("final").scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+function resetSnowman() {
+  hatIndex = 0;
+  scarfIndex = 0;
+  faceIndex = 0;
+  armIndex = 0;
+  buttonIndex = 0;
+
+  document.getElementById("hat").style.background = hats[0];
+  document.getElementById("scarf").style.background = scarfs[0];
+  document.querySelector(".mouth").textContent = faces[0][0];
+  document.getElementById("buttons").innerHTML = buttons[0];
+  document.getElementById("arms").style.opacity = "1";
+  document.getElementById("arms").style.transform = "scale(1)";
+  document.getElementById("final").style.display = "none";
+}
+
+function makeSnow() {
+  const snow = document.createElement("div");
+  snow.className = "snowflake";
+  snow.textContent = "❄";
+  snow.style.left = Math.random() * 100 + "vw";
+  snow.style.animationDuration = (4 + Math.random() * 6) + "s";
+  snow.style.fontSize = (10 + Math.random() * 15) + "px";
+  document.body.appendChild(snow);
+
+  setTimeout(() => snow.remove(), 10000);
+}
+
+setInterval(makeSnow, 350);
+</script>
+
+</body>
+</html>
