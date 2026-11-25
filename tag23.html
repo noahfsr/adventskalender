@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 23 – Schneeballschlacht ❄️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background: linear-gradient(#10243d, #315b78, #d4eaf2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.game {
+    width: 100%;
+    max-width: 750px;
+    text-align: center;
+}
+
+h1 {
+    font-size: clamp(27px, 6vw, 40px);
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #dcecf5;
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stat {
+    background: #ffffff22;
+    border: 1px solid #ffffff44;
+    border-radius: 14px;
+    padding: 12px 20px;
+    min-width: 120px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 25px;
+    margin-top: 4px;
+}
+
+.arena {
+    position: relative;
+    width: 100%;
+    height: 410px;
+    overflow: hidden;
+    border: 3px solid #ffffffaa;
+    border-radius: 22px;
+    background: linear-gradient(#8bbbd5 0%, #d9edf4 70%, #ffffff 70%);
+    box-shadow: 0 15px 40px #07182c55;
+    cursor: crosshair;
+    touch-action: manipulation;
+}
+
+.mountain {
+    position: absolute;
+    bottom: 28%;
+    left: -5%;
+    width: 110%;
+    height: 150px;
+    background: #eaf5f8;
+    clip-path: polygon(0 100%, 18% 25%, 30% 60%, 52% 0, 75% 65%, 90% 20%, 100% 100%);
+    opacity: .9;
+}
+
+.snowground {
+    position: absolute;
+    bottom: 0;
+    height: 30%;
+    width: 100%;
+    background: linear-gradient(#ffffff, #d9edf4);
+}
+
+.target {
+    position: absolute;
+    z-index: 3;
+    border: 0;
+    background: transparent;
+    cursor: crosshair;
+    font-size: 55px;
+    padding: 5px;
+    transform: translate(-50%, -50%);
+    transition: transform .15s;
+    filter: drop-shadow(0 5px 3px #31536a55);
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.target:active {
+    transform: translate(-50%, -50%) scale(.9);
+}
+
+.target.hit {
+    animation: disappear .3s forwards;
+    pointer-events: none;
+}
+
+@keyframes disappear {
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.8) rotate(30deg);
+    }
+}
+
+.snowball {
+    position: absolute;
+    z-index: 8;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, white, #b9dce9);
+    box-shadow: 0 2px 8px #31536a66;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+}
+
+.thrower {
+    position: absolute;
+    z-index: 5;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 62px;
+    pointer-events: none;
+}
+
+.hint {
+    color: #18364a;
+    font-weight: bold;
+    margin: 13px 0;
+}
+
+button.action {
+    border: none;
+    border-radius: 13px;
+    padding: 13px 22px;
+    background: #ffffff;
+    color: #18364a;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button.action:hover {
+    background: #d9edf4;
+}
+
+.message {
+    display: none;
+    margin-top: 20px;
+    padding: 25px;
+    background: #ffffff22;
+    border: 1px solid #ffffff66;
+    border-radius: 20px;
+    animation: appear .6s ease;
+}
+
+.message h2 {
+    margin-top: 0;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media(max-width: 500px) {
+    .arena { height: 370px; }
+    .target { font-size: 47px; }
+    .stat { padding: 10px; min-width: 0; flex: 1; }
+}
+</style>
+</head>
+
+<body>
+<div class="game">
+
+    <h1>☃️ Schneeballschlacht ❄️</h1>
+    <p class="subtitle">Zeig, wie gut du zielen kannst!</p>
+
+    <div class="stats">
+        <div class="stat">
+            Treffer
+            <strong id="score">0 / 10</strong>
+        </div>
+        <div class="stat">
+            Schneebälle
+            <strong id="balls">20</strong>
+        </div>
+    </div>
+
+    <div class="arena" id="arena">
+        <div class="mountain"></div>
+        <div class="snowground"></div>
+
+        <button class="target" style="left:15%;top:42%" aria-label="Ziel treffen">🎯</button>
+        <button class="target" style="left:38%;top:28%" aria-label="Ziel treffen">⛄</button>
+        <button class="target" style="left:65%;top:43%" aria-label="Ziel treffen">🎁</button>
+        <button class="target" style="left:85%;top:25%" aria-label="Ziel treffen">🎯</button>
+        <button class="target" style="left:23%;top:70%" aria-label="Ziel treffen">🎁</button>
+        <button class="target" style="left:52%;top:60%" aria-label="Ziel treffen">🎯</button>
+        <button class="target" style="left:78%;top:70%" aria-label="Ziel treffen">⛄</button>
+        <button class="target" style="left:43%;top:43%" aria-label="Ziel treffen">🎯</button>
+        <button class="target" style="left:10%;top:63%" aria-label="Ziel treffen">⛄</button>
+        <button class="target" style="left:90%;top:55%" aria-label="Ziel treffen">🎁</button>
+
+        <div class="thrower">🧤</div>
+    </div>
+
+    <p class="hint" id="hint">Tippe auf ein Ziel, um einen Schneeball zu werfen!</p>
+
+    <button class="action" onclick="restart()">Neu starten ↻</button>
+
+    <div class="message" id="message">
+        <h2>🎉 Geschafft! ❄️</h2>
+        <p>
+            Du hast alle Ziele getroffen!<br><br>
+            Ich hoffe, du hattest Spaß bei dieser kleinen
+            Schneeballschlacht. ❤️<br><br>
+            Und vergiss nicht: Du bist mein schönstes
+            Weihnachtsgeschenk. ❤️
+        </p>
+        <p>Ich hab dich lieb! ☃️</p>
+    </div>
+</div>
+
+<script>
+const arena = document.getElementById("arena");
+const targets = [...document.querySelectorAll(".target")];
+
+let score = 0;
+let balls = 20;
+let finished = false;
+
+const scoreDisplay = document.getElementById("score");
+const ballsDisplay = document.getElementById("balls");
+const hint = document.getElementById("hint");
+const message = document.getElementById("message");
+
+function updateStats() {
+    scoreDisplay.textContent = score + " / 10";
+    ballsDisplay.textContent = balls;
+}
+
+function throwBall(target) {
+    if (finished || balls <= 0 || target.classList.contains("hit")) {
+        return;
+    }
+
+    balls--;
+
+    const arenaRect = arena.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    const startX = arenaRect.width / 2;
+    const startY = arenaRect.height - 45;
+
+    const endX = targetRect.left - arenaRect.left + targetRect.width / 2;
+    const endY = targetRect.top - arenaRect.top + targetRect.height / 2;
+
+    const ball = document.createElement("div");
+    ball.className = "snowball";
+    arena.appendChild(ball);
+
+    const duration = 350;
+    const startTime = performance.now();
+
+    function animate(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+
+        const x = startX + (endX - startX) * progress;
+        const y = startY + (endY - startY) * progress
+                  - Math.sin(progress * Math.PI) * 95;
+
+        ball.style.left = x + "px";
+        ball.style.top = y + "px";
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            ball.remove();
+            hitTarget(target);
+        }
+    }
+
+    requestAnimationFrame(animate);
+    updateStats();
+}
+
+function hitTarget(target) {
+    if (finished || target.classList.contains("hit")) return;
+
+    target.classList.add("hit");
+    score++;
+
+    hint.textContent = "Treffer! Sehr gut! ❄️";
+    updateStats();
+
+    if (score >= 10) {
+        finished = true;
+        hint.textContent = "Du hast alle 10 Ziele getroffen! 🎉";
+        message.style.display = "block";
+    } else if (balls === 0) {
+        hint.textContent = "Keine Schneebälle mehr! Starte neu.";
+    }
+}
+
+targets.forEach(target => {
+    target.addEventListener("click", event => {
+        event.stopPropagation();
+        throwBall(target);
+    });
+});
+
+function restart() {
+    score = 0;
+    balls = 20;
+    finished = false;
+
+    targets.forEach(target => {
+        target.classList.remove("hit");
+    });
+
+    message.style.display = "none";
+    hint.textContent = "Tippe auf ein Ziel, um einen Schneeball zu werfen!";
+    updateStats();
+}
+
+updateStats();
+</script>
+</body>
+</html>
