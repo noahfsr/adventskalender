@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 17 – Der Wunschbrief ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #54283f, transparent 55%),
+        linear-gradient(145deg, #180f1b, #2b1425);
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 25px;
+    padding: 30px 22px;
+    box-shadow: 0 15px 50px #0005;
+}
+
+h1 {
+    color: #ffb8d1;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #e8cbd8;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.letter {
+    background: linear-gradient(145deg, #f8dce5, #e9b8cb);
+    color: #54283f;
+    border-radius: 16px;
+    padding: 20px 15px;
+    margin: 14px 0;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px #0003;
+}
+
+.letter:hover {
+    transform: translateY(-3px);
+}
+
+.letter-icon {
+    font-size: 35px;
+}
+
+.letter h2 {
+    margin: 8px 0 4px;
+    font-size: 19px;
+}
+
+.letter p {
+    margin: 0;
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.message {
+    display: none;
+    margin-top: 15px;
+    padding: 17px;
+    background: rgba(80, 30, 55, 0.12);
+    border-radius: 12px;
+    line-height: 1.7;
+    animation: appear 0.5s ease;
+}
+
+.letter.opened {
+    background: linear-gradient(145deg, #ffeaf0, #f3ccdc);
+}
+
+.letter.opened .message {
+    display: block;
+}
+
+.final {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 16px;
+    background: rgba(255,184,209,0.12);
+    line-height: 1.8;
+    animation: appear 1s ease;
+}
+
+.final h2 {
+    color: #ffb8d1;
+}
+
+.progress {
+    color: #e8cbd8;
+    font-size: 13px;
+    margin-top: 22px;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div style="font-size:42px;">💌</div>
+
+    <h1>Der magische Wunschbrief</h1>
+
+    <p class="subtitle">
+        Drei kleine Briefe warten auf dich.<br>
+        Öffne sie und entdecke, was darin steht.
+    </p>
+
+    <div class="letter" onclick="openLetter(this)">
+        <div class="letter-icon">🌷</div>
+        <h2>Brief 1 – Eine Erinnerung</h2>
+        <p>Ein kleiner Moment, den ich nicht vergessen möchte</p>
+
+        <div class="message">
+            Manchmal sind es gar nicht die großen Dinge,
+            die einem besonders im Gedächtnis bleiben.
+            Oft sind es die kleinen Momente mit dir,
+            die mir ein Lächeln ins Gesicht zaubern.
+            Ich bin froh über jede einzelne Erinnerung,
+            die wir gemeinsam sammeln. ❤️
+        </div>
+    </div>
+
+    <div class="letter" onclick="openLetter(this)">
+        <div class="letter-icon">⭐</div>
+        <h2>Brief 2 – Ein Wunsch</h2>
+        <p>Etwas, das ich gerne mit dir erleben möchte</p>
+
+        <div class="message">
+            Ich wünsche mir, dass wir noch ganz viele
+            schöne Dinge zusammen erleben.
+            Neue Orte entdecken, gemeinsam lachen,
+            kleine Abenteuer erleben und irgendwann
+            auf all diese Erinnerungen zurückblicken. ❤️
+        </div>
+    </div>
+
+    <div class="letter" onclick="openLetter(this)">
+        <div class="letter-icon">❤️</div>
+        <h2>Brief 3 – Eine Überraschung</h2>
+        <p>Eine Nachricht nur für dich</p>
+
+        <div class="message">
+            Falls du es heute noch nicht gehört hast:
+            Du bist ein unglaublich besonderer Mensch.
+            Ich bin wirklich glücklich, dich an meiner
+            Seite zu haben. Danke, dass es dich gibt.
+            Ich liebe dich! ❤️
+        </div>
+    </div>
+
+    <div class="progress" id="progress">
+        0 von 3 Briefen geöffnet
+    </div>
+
+    <div class="final" id="final">
+        <h2>✨ Alle Briefe geöffnet ✨</h2>
+        Du hast alle drei kleinen Überraschungen
+        entdeckt!
+
+        <p>
+            Und das Schönste daran ist:
+            Es warten noch viele weitere Erinnerungen
+            auf uns. ❤️
+        </p>
+    </div>
+
+</div>
+
+<script>
+let opened = 0;
+
+function openLetter(letter) {
+
+    if (letter.classList.contains("opened")) {
+        return;
+    }
+
+    letter.classList.add("opened");
+    opened++;
+
+    document.getElementById("progress").textContent =
+        opened + " von 3 Briefen geöffnet";
+
+    if (opened === 3) {
+        document.getElementById("final").style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
