@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tag 18 – Die Geschenkbox</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at top, #633044, transparent 55%),
+        linear-gradient(145deg, #160e19, #321624);
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+    padding: 28px 22px;
+    text-align: center;
+    border: 1px solid #ffffff20;
+    border-radius: 25px;
+    background: #ffffff0c;
+    box-shadow: 0 15px 50px #0005;
+}
+
+h1 {
+    color: #ffd18b;
+    font-size: 27px;
+}
+
+.intro {
+    color: #e9ced8;
+    line-height: 1.6;
+}
+
+.gift {
+    font-size: 85px;
+    margin: 20px 0;
+    animation: float 2s infinite ease-in-out;
+}
+
+@keyframes float {
+    50% { transform: translateY(-8px); }
+}
+
+.keys {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.key {
+    font-size: 27px;
+    opacity: 0.25;
+    transition: 0.3s;
+}
+
+.key.active {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px gold);
+}
+
+.riddle {
+    display: none;
+    padding: 20px;
+    margin-top: 20px;
+    background: #ffffff10;
+    border: 1px solid #ffffff20;
+    border-radius: 17px;
+    animation: appear 0.5s ease;
+}
+
+.riddle.active {
+    display: block;
+}
+
+.question {
+    color: #ffd18b;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d99a6b;
+    border-radius: 10px;
+    outline: none;
+    background: #fff;
+    color: #321624;
+    font-size: 16px;
+    text-align: center;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 13px 20px;
+    margin-top: 12px;
+    background: linear-gradient(135deg, #f5c27b, #d99561);
+    color: #321624;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: scale(1.04);
+}
+
+.feedback {
+    min-height: 24px;
+    margin-top: 12px;
+    font-size: 14px;
+    color: #ffc0d3;
+}
+
+.success {
+    color: #b8efc5;
+}
+
+.final {
+    display: none;
+    margin-top: 22px;
+    padding: 22px;
+    border-radius: 17px;
+    background: linear-gradient(145deg, #65354b, #3a1d30);
+    animation: appear 1s ease;
+}
+
+.final h2 {
+    color: #ffd18b;
+}
+
+.final p {
+    line-height: 1.8;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div style="font-size:38px;">🎄</div>
+
+    <h1>Die geheimnisvolle Geschenkbox</h1>
+
+    <p class="intro">
+        Eine kleine Überraschung wartet auf dich.
+        Doch die Geschenkbox ist verschlossen!
+        Löse die drei Rätsel und sammle alle Schlüssel.
+    </p>
+
+    <div class="gift" id="gift">🎁</div>
+
+    <div class="keys">
+        <div class="key" id="key1">🗝️</div>
+        <div class="key" id="key2">🗝️</div>
+        <div class="key" id="key3">🗝️</div>
+    </div>
+
+    <div class="riddle active" id="riddle1">
+        <div class="question">Rätsel 1 – Das Emoji-Rätsel</div>
+        <p>❤️ + ❄️ + 🎄</p>
+        <p>Welches Fest ist gemeint?</p>
+        <input id="answer1" placeholder="Deine Antwort">
+        <button onclick="check(1)">Antwort prüfen</button>
+        <div class="feedback" id="feedback1"></div>
+    </div>
+
+    <div class="riddle" id="riddle2">
+        <div class="question">Rätsel 2 – Die fehlende Zahl</div>
+        <p style="font-size:21px;">2 – 4 – 8 – 16 – ?</p>
+        <p>Welche Zahl kommt als Nächstes?</p>
+        <input id="answer2" type="number" placeholder="Deine Antwort">
+        <button onclick="check(2)">Antwort prüfen</button>
+        <div class="feedback" id="feedback2"></div>
+    </div>
+
+    <div class="riddle" id="riddle3">
+        <div class="question">Rätsel 3 – Das letzte Rätsel</div>
+        <p>
+            Was ist wertvoller als jedes Geschenk
+            und wird schöner, wenn man es teilt?
+        </p>
+        <input id="answer3" placeholder="Deine Antwort">
+        <button onclick="check(3)">Antwort prüfen</button>
+        <div class="feedback" id="feedback3"></div>
+    </div>
+
+    <div class="final" id="final">
+        <div style="font-size:65px;">🎁✨</div>
+        <h2>Die Geschenkbox ist offen!</h2>
+
+        <p>
+            Überraschung! ❤️
+            <br><br>
+            Das schönste Geschenk ist für mich
+            nicht etwas, das man einpacken kann.
+            Es sind die gemeinsamen Momente,
+            das Lachen und all die Erinnerungen,
+            die wir miteinander teilen.
+            <br><br>
+            Ich bin unglaublich froh, dich zu haben.
+            Ich liebe dich! ❤️
+        </p>
+    </div>
+
+</div>
+
+<script>
+let solved = [false, false, false];
+
+function check(number) {
+
+    if (solved[number - 1]) return;
+
+    const input = document.getElementById("answer" + number);
+    const feedback = document.getElementById("feedback" + number);
+
+    let answer = input.value.trim().toLowerCase();
+    let correct = false;
+
+    if (number === 1) {
+        correct = ["weihnachten", "weihnachtsfest"].includes(answer);
+    }
+
+    if (number === 2) {
+        correct = answer === "32";
+    }
+
+    if (number === 3) {
+        correct = ["liebe", "freundschaft"].includes(answer);
+    }
+
+    if (!correct) {
+        feedback.textContent = "Das stimmt noch nicht. Versuch es noch einmal! ❤️";
+        return;
+    }
+
+    solved[number - 1] = true;
+
+    document.getElementById("key" + number).classList.add("active");
+
+    feedback.textContent = "Richtig! Du hast einen Schlüssel gefunden! ✨";
+    feedback.classList.add("success");
+
+    input.disabled = true;
+
+    const button = feedback.previousElementSibling;
+    button.disabled = true;
+    button.style.opacity = "0.5";
+
+    if (number < 3) {
+        document.getElementById("riddle" + number)
+            .classList.remove("active");
+
+        document.getElementById("riddle" + (number + 1))
+            .classList.add("active");
+    }
+
+    if (solved.every(Boolean)) {
+        document.getElementById("gift").textContent = "💝";
+
+        document.getElementById("riddle3")
+            .classList.remove("active");
+
+        document.getElementById("final").style.display = "block";
+    }
+}
+</script>
+
+</body>
+</html>
